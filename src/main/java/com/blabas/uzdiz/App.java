@@ -1,5 +1,6 @@
 package com.blabas.uzdiz;
 
+import com.blabas.uzdiz.singleton.Command;
 import com.blabas.uzdiz.utils.FileReader;
 import com.blabas.uzdiz.utils.RegexMatcher;
 
@@ -10,12 +11,8 @@ import static com.blabas.uzdiz.utils.SysoutWrapper.*;
  */
 public class App {
     public static void main(String[] args) {
-        RegexMatcher regexMatcher = new RegexMatcher();
-        if(regexMatcher.checkRegex(args)){
-            FileReader fileReader = new FileReader();
-            fileReader.readAndParseTxtFile(regexMatcher.getLoadedFileName());
-        }
 
-
+        Command command = Command.getInstance();
+        command.initialize(args);
     }
 }
