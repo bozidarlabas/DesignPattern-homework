@@ -13,7 +13,7 @@ public class App {
         RegexMatcher regexMatcher = new RegexMatcher();
         if(regexMatcher.checkRegex(args)){
             FileReader fileReader = new FileReader();
-
+            fileReader.readAndParseTxtFile(regexMatcher.getLoadedFileName());
         }
 
 

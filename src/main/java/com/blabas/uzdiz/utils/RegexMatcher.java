@@ -29,17 +29,15 @@ public class RegexMatcher {
         boolean status = matcher.matches();
         if(status){
             printlnHeader("naziv datoteke");
-            println("datoteka 1: " + matcher.group(1).split(" ")[0]);
-            if(matcher.group(1).split(" ")[1] != null){
-                println("datoteka 2: " + matcher.group(1).split(" ")[1]);
-            }
-
+            loadedFileName =  matcher.group(1).split(" ")[0];
+            println("datoteka: " + matcher.group(1).split(" ")[0]);
             return true;
         }
         println("Preko komandne linije morate proslijediti naziv txt datoteke!");
         return false;
-
     }
 
-
+    public String getLoadedFileName() {
+        return loadedFileName;
+    }
 }
