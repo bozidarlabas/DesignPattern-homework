@@ -1,6 +1,5 @@
 package com.blabas.uzdiz.composite.component;
 
-import com.blabas.uzdiz.composite.component.impl.Element;
 import com.blabas.uzdiz.factory.product.Shape;
 
 /**
@@ -16,11 +15,15 @@ public abstract class ElementComponent {
         throw new UnsupportedOperationException();
     }
 
-    public Element getComponent(int index) {
+    public ElementComponent getComponent(int index) {
         throw new UnsupportedOperationException();
     }
 
     public void displayElementInfo() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void displayChildInfo() {
         throw new UnsupportedOperationException();
     }
 

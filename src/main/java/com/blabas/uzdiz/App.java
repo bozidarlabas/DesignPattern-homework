@@ -9,9 +9,9 @@ import static com.blabas.uzdiz.utils.SysoutWrapper.*;
 /**
  * Created by bozidar on 02.12.2015..
  */
+
 public class App {
     public static void main(String[] args) {
-
         Command command = Command.getInstance();
         command.initialize(args);
     }
