@@ -22,11 +22,15 @@ public class ElementAdapter {
     private RegexMatcher regexMatcher;
     private ArrayList<String> loadedItems;
     private List<ElementComponent> parrentComponents;
+    private final int CIRCLE = 3;
+    private final int RECTANGLE = 4;
+    private Factory shapeFactory;
 
     public ElementAdapter() {
         fileReader = new FileReader();
         regexMatcher = new RegexMatcher();
         parrentComponents = new ArrayList<>();
+        shapeFactory = new ShapeFactory();
     }
 
 
@@ -58,23 +62,29 @@ public class ElementAdapter {
                 parrentElement.setType(parseInt(item.split("   ")[0]));
                 parrentElement.setCode(item.split("   ")[1]);
                 parrentElement.setParrent(item.split("   ")[2]);
+                ArrayList<String> coordinates = getCoordinates(item.split("   ")[3]);
+                Shape shape = determineShapeType(coordinates);
+                parrentElement.setShape(shape);
                 parrentElement.setColor(item.split("   ")[4]);
                 parrentComponents.add(parrentElement);
             }
         }
     }
 
-    public List<ElementComponent> parseChildItems(){
+    public List<ElementComponent> parseChildItems() {
         int index = 0;
-        for(String item : loadedItems){
-            if(index != 0){
+        for (String item : loadedItems) {
+            if (index != 0) {
                 String parrentCode = item.split("   ")[2];
-                for(ElementComponent parrentComponent : parrentComponents){
-                    if(parrentComponent.getCode().equals(parrentCode)){
+                for (ElementComponent parrentComponent : parrentComponents) {
+                    if (parrentComponent.getCode().equals(parrentCode)) {
                         ElementComponent childItem = new Element();
                         childItem.setType(parseInt(item.split("   ")[0]));
                         childItem.setCode(item.split("   ")[1]);
                         childItem.setParrent(item.split("   ")[2]);
+                        ArrayList<String> coordinates = getCoordinates(item.split("   ")[3]);
+                        Shape shape = determineShapeType(coordinates);
+                        childItem.setShape(shape);
                         childItem.setColor(item.split("   ")[4]);
                         parrentComponent.add(childItem);
                         break;
@@ -86,6 +96,38 @@ public class ElementAdapter {
         return parrentComponents;
     }
 
+    private ArrayList<String> getCoordinates(String coordianteJoined){
+        String[] coordianteSeparate = coordianteJoined.split(",");
+        ArrayList<String> coordinatesData = new ArrayList<>();
+        for(String coordinate : coordianteSeparate){
+            System.out.print("coordinate: " + coordinate + " ");
+            coordinatesData.add(coordinate);
+        }
+        println("");
+        println("size of coordinates: " + coordinatesData.size());
+        return coordinatesData;
+    }
+
+    //Used Factory method
+    private Shape determineShapeType(ArrayList<String> coordinates){
+        Shape shape;
+        switch (coordinates.size()){
+            case CIRCLE:
+                shape = shapeFactory.createShape("Circle");
+                shape.setShapeType("Circle");
+                break;
+            case RECTANGLE:
+                shape = shapeFactory.createShape("Rectangle");
+                shape.setShapeType("Rectangle");
+                break;
+            default:
+                shape = shapeFactory.createShape("Polygon");
+                shape.setShapeType("Polygon");
+                break;
+        }
+        shape.setPoints(coordinates);
+        return shape;
+    }
 
 
 
@@ -103,7 +145,7 @@ public class ElementAdapter {
     public void buildShape(String type){
         Factory shapeFactory = new ShapeFactory();
         Shape shape = shapeFactory.createShape(type);
-        shape.draw();
+
     }
 
 }

@@ -18,7 +18,6 @@ public class ShapeFactory extends Factory {
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
         return shape;
     }
 }

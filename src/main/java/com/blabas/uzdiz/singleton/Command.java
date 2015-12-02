@@ -40,13 +40,16 @@ public class Command {
         Validator validator = new Validator();
         if(elementAdapter.isFileNameValid(args)){
 
+            //Element adapter load, read and parse file to composite Tree of Element components
             elementAdapter.loadFile();
             elementAdapter.readFile();
             elementAdapter.parseParrentItems();
             List<ElementComponent> components = elementAdapter.parseChildItems();
 
+            //Element manager displays data from Tree of Element components
             ElementManager elementManager = new ElementManager(components);
             elementManager.getElementList();
+
 
 
 
