@@ -1,5 +1,6 @@
 package com.blabas.uzdiz.singleton;
 
+import com.blabas.uzdiz.facade.ShapeMaker;
 import com.blabas.uzdiz.utils.FileReader;
 import com.blabas.uzdiz.utils.RegexMatcher;
 
@@ -37,7 +38,12 @@ public class Command {
         if(regexMatcher.checkRegex(args)){
             FileReader fileReader = new FileReader();
             fileReader.readAndParseTxtFile(regexMatcher.getLoadedFileName());
-            //println(fileReader.getParsedData().get(0));
+            println(fileReader.getParsedData().get(0));
+            ShapeMaker shapeMaker = new ShapeMaker();
+
+            String shapeType = shapeMaker.determineShapeType();
+            shapeMaker.buildShape(shapeType);
+
         }
     }
 }
