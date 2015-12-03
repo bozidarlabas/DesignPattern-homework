@@ -2,6 +2,7 @@ package com.blabas.uzdiz.facade;
 
 import com.blabas.uzdiz.composite.component.ElementComponent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.blabas.uzdiz.utils.SysoutWrapper.println;
@@ -29,9 +30,25 @@ public class Validator {
         if(element.getType() == 0){
             return true;
         }else{
-            println("ElementLeaf sa sifrom: " +element.getCode() + " je prvi element i nije kontejner");
+            println("Element sa sifrom: " +element.getCode() + " je prvi element i nije kontejner");
             return false;
         }
+    }
+
+    public boolean codeAlreadyExist(ArrayList<ElementAdapter.Code> storedCodes, String componentCode){
+       for(ElementAdapter.Code code : storedCodes){
+           if(code.getStoredCode().equals(componentCode)){
+               println("NEISPRAVAN ZAPIS: " + "element sa sifrom " + componentCode + " vec postoji!");
+               return true;
+           }
+
+       }
+        return false;
+    }
+
+    public void parrentCodeExistsMessage(String parrentCode, String childCode){
+        println("NEISPRAVAN ZAPIS: " + "roditelj sa sifrom " + parrentCode + " ne postoji! (jednostavni element " + childCode + " ne moze biti sadrzan u njemu)");
+
     }
 
 

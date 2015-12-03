@@ -105,5 +105,13 @@ public abstract class ElementComponent {
     }
 
 
+    public void storeCode(){
+        throw new UnsupportedOperationException();
+    }
+
+    public void storeCodeChild(){
+        throw new UnsupportedOperationException();
+    }
+
 
 }

@@ -8,8 +8,8 @@ package com.blabas.uzdiz.registry;
 public class RegistryBuilder {
 
     /**
-     * 1. Samo jedan element moze imati zapis s istom sifrom
-     * 2. Jednostavni element mora biti sadrzan u kontejneru koji prethodno mora postojati
+     * 1. Samo jedan element moze imati zapis s istom sifrom +
+     * 2. Jednostavni element mora biti sadrzan u kontejneru koji prethodno mora postojati +
      * 3. Mora postojati samo jedan slozeni element koji ima rod s vlastitom sifrom
      * 4. Slozeni element mora biti prvi
      * 5. Slozeni element mora biti pravokutnik

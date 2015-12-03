@@ -1,5 +1,6 @@
 package com.blabas.uzdiz.singleton;
 
+import com.blabas.uzdiz.facade.Validator;
 import com.blabas.uzdiz.iterator.ElementManager;
 import com.blabas.uzdiz.composite.component.ElementComponent;
 import com.blabas.uzdiz.facade.ElementAdapter;
@@ -14,12 +15,11 @@ import static com.blabas.uzdiz.utils.SysoutWrapper.println;
 /**
  * Created by bozidar on 02.12.2015..
  */
-public class Command implements OnMenuItemSelected{
+public class Command implements OnMenuItemSelected {
 
     private Registry registry;
     private ElementAdapter elementAdapter;
     private ElementManager elementManager;
-
 
 
     /**
@@ -47,9 +47,17 @@ public class Command implements OnMenuItemSelected{
      */
     public void initialize() {
         elementAdapter = registry.provideElementAdapter();
-        if (elementAdapter.isFileNameValid()) {
-            loadFile();
-            parseLoadedFile();
+        String loadedFileName = registry.getArgs()[0];
+        if (elementAdapter.isFileNameValid(loadedFileName)) {
+            loadFile(registry.provideRegexMatcher().getLoadedFileName());
+            List<ElementComponent> parsedComponents = parseLoadedFile();
+
+
+            elementAdapter.displayAllCodes();
+
+
+
+            storeLoadedItems(parsedComponents);
             Menu menu = registry.provideMenu();
             menu.setOnMenuClickListener(this);
             menu.choseOption();
@@ -89,23 +97,32 @@ public class Command implements OnMenuItemSelected{
         //}
     }
 
-    private void loadFile() {
-        elementAdapter.loadFile();
+//    private void validateItems(List<ElementComponent> parsedComponents){
+//        Validator validator = registry.provideValidator();
+//        validator.checkCodeDuplicate(parsedComponents);
+//    }
+
+    private void storeLoadedItems(List<ElementComponent> allComponents) {
+        ElementManager elementManager = registry.provideElementManager();
+        elementManager.setItems(allComponents);
+
+    }
+
+    private void loadFile(String fileName) {
+        elementAdapter.loadFile(fileName);
         elementAdapter.readFile();
     }
 
-    private void parseLoadedFile() {
+    private List<ElementComponent> parseLoadedFile() {
         elementManager = registry.provideElementManager();
         elementAdapter.parseParrentItems();
-        List<ElementComponent> allComponents = elementAdapter.parseChildItems();
-        ElementManager elementManager = registry.provideElementManager();
-        elementManager.setItems(allComponents);
+        return elementAdapter.parseChildItems();
     }
 
     @Override
     public void performFirstOperation() {
         println("\nOdabrali ste opciju 1!\n");
-        for(ElementComponent component : elementManager.getItems()){
+        for (ElementComponent component : elementManager.getItems()) {
             component.displayElementInfo();
         }
     }
@@ -113,20 +130,30 @@ public class Command implements OnMenuItemSelected{
     @Override
     public void performSecondOperation() {
         println("\nOdabrali ste opciju 2!\n");
-        for(ElementComponent component : elementManager.getItems()){
+        for (ElementComponent component : elementManager.getItems()) {
             component.displayVisibleIntersectedParrentInfo();
         }
     }
 
     @Override
-    public void performThirdOperation(String elementCode, boolean status){
+    public void performThirdOperation(String elementCode, boolean status) {
         println("\nOdabrali ste opciju 3!\n");
-
-        for(ElementComponent component : elementManager.getItems()){
+        for (ElementComponent component : elementManager.getItems()) {
             component.changeStatus(elementCode, status);
         }
-
     }
+
+    @Override
+    public void performFifthOperation(String fileName) {
+        println("\nOdabrali ste opciju 5!\n");
+
+        if (elementAdapter.isFileNameValid(fileName)) {
+            loadFile(fileName);
+            List<ElementComponent> parsedComponents = parseLoadedFile();
+            storeLoadedItems(parsedComponents);
+        }
+    }
+
 
     public void setRegistry(Registry registry) {
         this.registry = registry;

@@ -5,8 +5,10 @@ import com.blabas.uzdiz.composite.component.Element;
 import com.blabas.uzdiz.factory.creator.Factory;
 import com.blabas.uzdiz.factory.creator.impl.ShapeFactory;
 import com.blabas.uzdiz.factory.product.Shape;
+import com.blabas.uzdiz.registry.Registry;
 import com.blabas.uzdiz.utils.FileReader;
 import com.blabas.uzdiz.utils.RegexMatcher;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
@@ -23,26 +25,33 @@ public class ElementAdapter {
     private FileReader fileReader;
     private RegexMatcher regexMatcher;
     private ArrayList<String> loadedItems;
+    private ArrayList<String> correctLoadedItems;
     private List<ElementComponent> parrentComponents;
     private final int CIRCLE = 3;
     private final int RECTANGLE = 4;
     private Factory shapeFactory;
-    private String[] args;
+    private Registry registry;
+    private Validator validator;
+    boolean isFirstElement = false;
 
-    public ElementAdapter(String[] args) {
+    private ArrayList<Code> codes;
+
+    public ElementAdapter(Registry registry) {
         fileReader = new FileReader();
-        regexMatcher = new RegexMatcher();
+        regexMatcher = registry.provideRegexMatcher();
         parrentComponents = new ArrayList<>();
         shapeFactory = new ShapeFactory();
-        this.args = args;
+        codes = new ArrayList<>();
+        validator = registry.provideValidator();
+        correctLoadedItems = new ArrayList<>();
     }
 
 
-    public boolean isFileNameValid() {
-        return regexMatcher.checkRegex(args);
+    public boolean isFileNameValid(String fileName) {
+        return regexMatcher.checkRegex(fileName);
     }
 
-    public void loadFile() {
+    public void loadFile(String fileName) {
         fileReader.readAndParseTxtFile(regexMatcher.getLoadedFileName());
     }
 
@@ -60,36 +69,52 @@ public class ElementAdapter {
     public void parseParrentItems() {
         ElementComponent parrentElement;
         for (String item : loadedItems) {
+            parrentElement = new Element();
             int elementType = parseInt(item.split("   ")[0]);
-            if (elementType == 0) {
-                parrentElement = new Element();
-                parrentElement.setType(parseInt(item.split("   ")[0]));
-                parrentElement.setCode(item.split("   ")[1]);
-                parrentElement.setParrent(item.split("   ")[2]);
-                ArrayList<Integer> coordinates = getCoordinates(item.split("   ")[3]);
-                Shape shape = determineShapeType(coordinates, "parrent", null);
-                parrentElement.setShape(shape);
-                parrentElement.setColor(item.split("   ")[4]);
-                parrentComponents.add(parrentElement);
+            Code code = new Code();
+            String componentCode = item.split("   ")[1];
+
+            if (!validator.codeAlreadyExist(codes, componentCode)) {
+                correctLoadedItems.add(item);
+                code.setStoredCode(componentCode);
+                code.setType(elementType);
+                codes.add(code);
+                if (elementType == 0) {
+                    parrentElement.setType(parseInt(item.split("   ")[0]));
+                    parrentElement.setCode(item.split("   ")[1]);
+                    parrentElement.setParrent(item.split("   ")[2]);
+                    ArrayList<Integer> coordinates = getCoordinates(item.split("   ")[3]);
+                    Shape shape = determineShapeType(coordinates, "parrent", null);
+                    parrentElement.setShape(shape);
+
+                    parrentElement.setColor(item.split("   ")[4]);
+                    parrentComponents.add(parrentElement);
+                }
             }
         }
     }
 
     public List<ElementComponent> parseChildItems() {
-        int index = 0;
-        for (String item : loadedItems) {
-            if (index != 0) {
+        ElementComponent childItem = new Element();
+        boolean correctParrent = false;
+
+        for (String item : correctLoadedItems) {
+            if (isFirstElement) {
+
                 String parrentCode = item.split("   ")[2];
+
+
                 for (ElementComponent parrentComponent : parrentComponents) {
+
                     if (parrentComponent.getCode().equals(parrentCode)) {
-                        ElementComponent childItem = new Element();
+                        correctParrent = true;
+                        childItem = new Element();
                         childItem.setType(parseInt(item.split("   ")[0]));
                         childItem.setCode(item.split("   ")[1]);
-                        childItem.setParrent(item.split("   ")[2]);
+                        //storedCodes.add(childItem.getCode());
+                        childItem.setParrent(parrentCode);
                         ArrayList<Integer> coordinates = getCoordinates(item.split("   ")[3]);
                         Shape.Point parrentPoint1 = parrentComponent.getShape().getPoints().get(0);
-
-
                         Shape shape = determineShapeType(coordinates, "child", parrentPoint1);
                         childItem.setShape(shape);
                         childItem.setColor(item.split("   ")[4]);
@@ -97,14 +122,26 @@ public class ElementAdapter {
                         println("Parretn: " + childItem.getParrent());
                         boolean isIntersected = childIntersectParrent(parrentComponent, childItem);
                         childItem.setIntersectParrent(isIntersected);
+
                         parrentComponent.add(childItem);
                         break;
                     }
                 }
+                if(!correctParrent){
+                    validator.parrentCodeExistsMessage(parrentCode, item.split("   ")[1]);
+                }
+                correctParrent = false;
+
             }
-            index++;
+            isFirstElement = true;
         }
+        loadedItems.clear();
+        correctLoadedItems.clear();
         return parrentComponents;
+    }
+
+    public void clearParrentComponents() {
+        parrentComponents.clear();
     }
 
     private ArrayList<Integer> getCoordinates(String coordianteJoined) {
@@ -146,22 +183,19 @@ public class ElementAdapter {
         println("PARRENT y: " + parrentComponent.getShape().getPoints().get(1).getY());
 
         println("CHILD x: " + childComponent.getShape().getRealShape().getBounds());
-        Area a =  ((Area) parrentComponent.getShape().getRealShape());
-        Area b =  (Area) childComponent.getShape().getRealShape();
+        Area a = ((Area) parrentComponent.getShape().getRealShape());
+        Area b = (Area) childComponent.getShape().getRealShape();
         b.intersect(a);
 
-        if(!b.isEmpty()){
+        if (!b.isEmpty()) {
             println("INTERSECT: " + "DA");
             return true;
 
-        }else{
+        } else {
             println("INTERSECT: " + "NE");
             return false;
 
         }
-
-
-
     }
 
 
@@ -179,7 +213,37 @@ public class ElementAdapter {
     public void buildShape(String type) {
         Factory shapeFactory = new ShapeFactory();
         Shape shape = shapeFactory.createShape(type);
-
     }
 
+    public void displayAllCodes() {
+        for (Code code : codes) {
+            println("code: " + code.getStoredCode() + " type: " + code.getType());
+        }
+    }
+
+    public class Code {
+        private String storedCode;
+        private int type;
+
+
+        public String getStoredCode() {
+            return storedCode;
+        }
+
+        public void setStoredCode(String storedCode) {
+            this.storedCode = storedCode;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+    }
+
+    public ArrayList<Code> getCodes() {
+        return codes;
+    }
 }

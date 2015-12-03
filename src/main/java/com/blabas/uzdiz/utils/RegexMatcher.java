@@ -13,26 +13,19 @@ public class RegexMatcher {
 
     private String loadedFileName;
 
-    private String getFileName(String args[]){
-        StringBuilder sb = new StringBuilder();
-
-        for(String arg : args){
-            sb.append(arg).append(" ");
-        }
-        return sb.toString().trim();
-    }
-
-    public boolean checkRegex(String args[]){
+    public boolean checkRegex(String fileName){
         String sintaksa = "(.*\\.txt$)";
         Pattern pattern = Pattern.compile(sintaksa);
-        Matcher matcher = pattern.matcher(getFileName(args));
+        Matcher matcher = pattern.matcher(fileName);
         boolean status = matcher.matches();
         if(status){
             loadedFileName =  matcher.group(1).split(" ")[0];
             printlnHeader("Validacija 1 - naziv txt datoteke je ispravan");
             return true;
+        }else{
+            printlnHeader("Validacija 1 - naziv txt datoteke je neispravan");
         }
-        println("Preko komandne linije morate proslijediti naziv txt datoteke!");
+
         return false;
     }
 

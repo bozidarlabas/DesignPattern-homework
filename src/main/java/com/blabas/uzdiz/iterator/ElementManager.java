@@ -9,13 +9,19 @@ import java.util.List;
  */
 public class ElementManager implements Container {
     List<ElementComponent> items;
+    List<String> allStoredCodes;
 
     public void setItems(List<ElementComponent> items) {
         this.items = items;
     }
 
+
     public List<ElementComponent> getItems() {
         return items;
+    }
+
+    public void setAllStoredCodes(String storedCode) {
+        this.allStoredCodes.add(storedCode);
     }
 
     @Override

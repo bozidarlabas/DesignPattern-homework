@@ -14,13 +14,13 @@ public class Menu {
     private Scanner sc;
     private OnMenuItemSelected onMenuItemSelected;
 
-    public Menu(){
+    public Menu() {
         sc = new Scanner(System.in);
     }
 
-    public void choseOption(){
+    public void choseOption() {
         int chosedOption = 0;
-        while(chosedOption == 0 || chosedOption != 6){
+        while (chosedOption == 0 || chosedOption != 6) {
             println("========================================================");
             println("|                      MENU                            |");
             println("========================================================");
@@ -39,12 +39,12 @@ public class Menu {
         }
     }
 
-    public void setOnMenuClickListener(OnMenuItemSelected onMenuItemSelected){
+    public void setOnMenuClickListener(OnMenuItemSelected onMenuItemSelected) {
         this.onMenuItemSelected = onMenuItemSelected;
     }
 
-    private void performOperation(int chosedOption){
-        switch (chosedOption){
+    private void performOperation(int chosedOption) {
+        switch (chosedOption) {
             case 1:
                 onMenuItemSelected.performFirstOperation();
                 break;
@@ -56,12 +56,19 @@ public class Menu {
                 String code = sc.nextLine();
                 System.out.print("Unesite novi status elementa : ");
                 String status = sc.nextLine();
-                if(status.equals("aktivni")){
+                if (status.equals("aktivni")) {
                     onMenuItemSelected.performThirdOperation(code, true);
-                }else{
+                } else {
                     onMenuItemSelected.performThirdOperation(code, false);
                 }
+                break;
+            case 4:
 
+                break;
+            case 5:
+                System.out.print("Unesite naziv datoteke : ");
+                String fileName = sc.nextLine();
+                onMenuItemSelected.performFifthOperation(fileName);
                 break;
         }
     }

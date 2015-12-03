@@ -30,7 +30,7 @@ public class Element extends ElementComponent {
     private ArrayList<ElementComponent> elementComponents = new ArrayList<>();
     private ElementManager elementManager;
 
-    public Element(){
+    public Element() {
         elementManager = Command.getInstance().getRegistry().provideElementManager();
     }
 
@@ -74,15 +74,15 @@ public class Element extends ElementComponent {
         this.shape = shape;
     }
 
-    public void add(ElementComponent element){
+    public void add(ElementComponent element) {
         elementComponents.add(element);
     }
 
-    public void remove(ElementComponent element){
+    public void remove(ElementComponent element) {
         elementComponents.remove(element);
     }
 
-    public ElementComponent getComponent(int index){
+    public ElementComponent getComponent(int index) {
         return elementComponents.get(index);
     }
 
@@ -102,41 +102,36 @@ public class Element extends ElementComponent {
         this.visible = visible;
     }
 
-    public void displayElementInfo(){
+    public void displayElementInfo() {
         printlnHeader("\nSlozeni element: " + getCode() + " status: " + isVisible());
 
         Iterator elementIterator = elementManager.getIterator(elementComponents);
 
-        while (elementIterator.hasNext()){
-            ElementComponent component = (ElementComponent)elementIterator.next();
+        while (elementIterator.hasNext()) {
+            ElementComponent component = (ElementComponent) elementIterator.next();
             component.displayChildInfo();
         }
     }
 
-    public void displayChildInfo(){
+    public void displayChildInfo() {
         println("   Jednostavni element: " + getCode() + " status: " + isVisible());
 
         Iterator elementIterator = elementManager.getIterator(elementComponents);
 
-        while (elementIterator.hasNext()){
-            ElementComponent component = (ElementComponent)elementIterator.next();
+        while (elementIterator.hasNext()) {
+            ElementComponent component = (ElementComponent) elementIterator.next();
             component.displayElementInfo();
         }
     }
 
-    public void displayVisibleIntersectedParrentInfo(){
+    public void displayVisibleIntersectedParrentInfo() {
         boolean showParrent = false;
-
-
         Iterator elementIterator = elementManager.getIterator(elementComponents);
-
-
         //Iterator elementIterator = elementComponents.iterator();
-
-        while (elementIterator.hasNext()){
+        while (elementIterator.hasNext()) {
             ElementComponent component = elementIterator.next();
-            if(component.isIntersectParrent() && component.isVisible()){
-                if(!showParrent){
+            if (component.isIntersectParrent() && component.isVisible()) {
+                if (!showParrent) {
                     printlnHeader("\nSlozeni element: " + getCode());
                     showParrent = true;
                 }
@@ -147,47 +142,67 @@ public class Element extends ElementComponent {
         }
     }
 
-    public void displayVisibleIntersectedChildInfo(){
+    public void displayVisibleIntersectedChildInfo() {
         println("   Jednostavni element: " + getCode());
 
         Iterator elementIterator = elementManager.getIterator(elementComponents);
 
-        while (elementIterator.hasNext()){
-            ElementComponent component = (ElementComponent)elementIterator.next();
+        while (elementIterator.hasNext()) {
+            ElementComponent component = (ElementComponent) elementIterator.next();
             component.displayVisibleIntersectedParrentInfo();
         }
     }
 
-    public void changeStatus(String code, boolean status){
+    public void changeStatus(String code, boolean status) {
         Iterator elementIterator = elementManager.getIterator(elementComponents);
 
         //Iterator elementIterator = elementComponents.iterator();
 
-        while (elementIterator.hasNext()){
+        while (elementIterator.hasNext()) {
             ElementComponent component = elementIterator.next();
-                if(component.getCode().equals(code)){
-                    component.setVisible(status);
-                    break;
-                }else{
-                    component.changeChildStatus(code, status);
-                }
-
+            if (component.getCode().equals(code)) {
+                component.setVisible(status);
+                break;
+            } else {
+                component.changeChildStatus(code, status);
+            }
 
 
         }
     }
 
-    public void changeChildStatus(String code, boolean status){
+    public void changeChildStatus(String code, boolean status) {
         Iterator elementIterator = elementManager.getIterator(elementComponents);
 
-        while (elementIterator.hasNext()){
-            ElementComponent component = (ElementComponent)elementIterator.next();
-            if(component.getCode().equals(code)){
+        while (elementIterator.hasNext()) {
+            ElementComponent component = elementIterator.next();
+            if (component.getCode().equals(code)) {
                 component.setCode(code);
                 break;
-            }else{
+            } else {
                 component.changeStatus(code, status);
             }
+
+        }
+    }
+
+    public void storeCode() {
+        Iterator elementIterator = elementManager.getIterator(elementComponents);
+
+        while (elementIterator.hasNext()) {
+            ElementComponent component = elementIterator.next();
+            elementManager.setAllStoredCodes(component.getCode());
+            component.storeCodeChild();
+        }
+    }
+
+    public void storeCodeChild() {
+        Iterator elementIterator = elementManager.getIterator(elementComponents);
+
+        while (elementIterator.hasNext()) {
+            ElementComponent component = elementIterator.next();
+            elementManager.setAllStoredCodes(component.getCode());
+            component.storeCode();
 
         }
     }
