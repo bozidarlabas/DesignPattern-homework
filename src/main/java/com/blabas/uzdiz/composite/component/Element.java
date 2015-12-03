@@ -24,7 +24,6 @@ public class Element extends ElementComponent {
     private Shape shape;
     private boolean intersectParrent;
     private boolean visible = true;
-    private Registry registry;
 
 
     private ArrayList<ElementComponent> elementComponents = new ArrayList<>();

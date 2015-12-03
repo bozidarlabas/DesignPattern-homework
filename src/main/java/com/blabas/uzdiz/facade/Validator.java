@@ -48,7 +48,28 @@ public class Validator {
 
     public void parrentCodeExistsMessage(String parrentCode, String childCode){
         println("NEISPRAVAN ZAPIS: " + "roditelj sa sifrom " + parrentCode + " ne postoji! (jednostavni element " + childCode + " ne moze biti sadrzan u njemu)");
+    }
 
+    public void firstElementNotParrent(){
+        println("NEISPRAVAN ZAPIS: Slozeni element mora biti prvi!");
+    }
+
+    public boolean existEqualParrentChildCode(String childCode, String parrentCode){
+        println("Vec postoji jedan slozeni element koji ima roditelja s vlastitom sifrom! Izbacen je element sa sifrom: " + parrentCode);
+        return childCode.equals(parrentCode);
+    }
+
+    public boolean checkCoordinates(String elementCode, ArrayList<Integer> coord){
+        int length = coord.size();
+        if(length <= 2 || (length % 2 != 0 && length > 3)){
+            System.out.print("NEISPRAVAN ZAPIS: " + "element: " + elementCode + " ima neispravne koordinate: ");
+            for(int coordinate : coord){
+                System.out.print(coordinate + ", ");
+            }
+            println("");
+            return false;
+        }
+        return true;
     }
 
 

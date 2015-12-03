@@ -10,6 +10,24 @@ public abstract class Shape {
     protected ArrayList<Point> points;
     protected String shapeType;
     private java.awt.Shape shape;
+    private ArrayList<Integer> coordinates;
+    private float area;
+
+    public float getArea() {
+        return area;
+    }
+
+    public void setArea(float area) {
+        this.area = area;
+    }
+
+    public ArrayList<Integer> getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(ArrayList<Integer> coordinates) {
+        this.coordinates = coordinates;
+    }
 
     public Shape(){
         points = new ArrayList<>();
@@ -18,6 +36,8 @@ public abstract class Shape {
     public abstract void setPoints(ArrayList<Integer> coordinate, String type, Shape.Point parrentPoint1);
 
     public abstract void setShapeType(String shapeType);
+
+    public abstract void calculateSurface();
 
     public void setShape(java.awt.Shape shape) {
         this.shape = shape;

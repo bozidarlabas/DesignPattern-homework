@@ -8,11 +8,10 @@ import com.blabas.uzdiz.factory.product.Shape;
 import com.blabas.uzdiz.registry.Registry;
 import com.blabas.uzdiz.utils.FileReader;
 import com.blabas.uzdiz.utils.RegexMatcher;
-import com.sun.org.apache.bcel.internal.classfile.Code;
 
 import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.blabas.uzdiz.utils.SysoutWrapper.println;
@@ -33,6 +32,8 @@ public class ElementAdapter {
     private Registry registry;
     private Validator validator;
     boolean isFirstElement = false;
+    boolean isFirstElementContainer = false;
+    private HashMap<String,String> colors;
 
     private ArrayList<Code> codes;
 
@@ -44,6 +45,7 @@ public class ElementAdapter {
         codes = new ArrayList<>();
         validator = registry.provideValidator();
         correctLoadedItems = new ArrayList<>();
+        colors = new HashMap<>();
     }
 
 
@@ -73,24 +75,38 @@ public class ElementAdapter {
             int elementType = parseInt(item.split("   ")[0]);
             Code code = new Code();
             String componentCode = item.split("   ")[1];
+            String parrentCode = item.split("   ")[2];
+            ArrayList<Integer> coord = getCoordinates(item.split("   ")[3]);
+            if(validator.checkCoordinates(componentCode, coord)){
+                if(componentCode.equals(parrentCode) && !isFirstElementContainer){
+                    isFirstElementContainer = true;
+                }else if(!componentCode.equals(parrentCode) && !isFirstElementContainer){
+                    validator.firstElementNotParrent();
+                }
 
-            if (!validator.codeAlreadyExist(codes, componentCode)) {
-                correctLoadedItems.add(item);
-                code.setStoredCode(componentCode);
-                code.setType(elementType);
-                codes.add(code);
-                if (elementType == 0) {
-                    parrentElement.setType(parseInt(item.split("   ")[0]));
-                    parrentElement.setCode(item.split("   ")[1]);
-                    parrentElement.setParrent(item.split("   ")[2]);
-                    ArrayList<Integer> coordinates = getCoordinates(item.split("   ")[3]);
-                    Shape shape = determineShapeType(coordinates, "parrent", null);
-                    parrentElement.setShape(shape);
+                if(isFirstElementContainer){
+                    if (!validator.codeAlreadyExist(codes, componentCode)) {
+                        correctLoadedItems.add(item);
+                        code.setStoredCode(componentCode);
+                        code.setType(elementType);
+                        codes.add(code);
+                        if (elementType == 0) {
+                            parrentElement.setType(parseInt(item.split("   ")[0]));
+                            parrentElement.setCode(item.split("   ")[1]);
+                            parrentElement.setParrent(item.split("   ")[2]);
+                            Shape shape = determineShapeType(coord, "parrent", null);
+                            parrentElement.setShape(shape);
 
-                    parrentElement.setColor(item.split("   ")[4]);
-                    parrentComponents.add(parrentElement);
+                            parrentElement.setColor(item.split("   ")[4]);
+                            parrentComponents.add(parrentElement);
+                        }
+                    }
                 }
             }
+
+
+
+
         }
     }
 
@@ -100,9 +116,7 @@ public class ElementAdapter {
 
         for (String item : correctLoadedItems) {
             if (isFirstElement) {
-
                 String parrentCode = item.split("   ")[2];
-
 
                 for (ElementComponent parrentComponent : parrentComponents) {
 
@@ -128,7 +142,14 @@ public class ElementAdapter {
                     }
                 }
                 if(!correctParrent){
-                    validator.parrentCodeExistsMessage(parrentCode, item.split("   ")[1]);
+                    String childCode = item.split("   ")[1];
+                    if(validator.existEqualParrentChildCode(childCode, parrentCode)){
+
+                    }
+                    else{
+                        validator.parrentCodeExistsMessage(parrentCode, childCode);
+                    }
+
                 }
                 correctParrent = false;
 
@@ -170,6 +191,7 @@ public class ElementAdapter {
                 shape.setShapeType("Polygon");
                 break;
         }
+
         shape.setPoints(coordinates, type, parrentPoint1);
         return shape;
     }
@@ -197,6 +219,12 @@ public class ElementAdapter {
 
         }
     }
+
+
+
+
+
+
 
 
     private int parseInt(String data) {

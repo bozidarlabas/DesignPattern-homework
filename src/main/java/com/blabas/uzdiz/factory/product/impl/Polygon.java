@@ -15,6 +15,7 @@ public class Polygon extends Shape {
 
     @Override
     public void setPoints(ArrayList<Integer> coordinates, String type, Point parrentPoint1) {
+        setCoordinates(coordinates);
         int x = 0;
         int y = 1;
         int[] xCoordinates = new int[coordinates.size()/2];
@@ -50,5 +51,24 @@ public class Polygon extends Shape {
     @Override
     public void setShapeType(String shapeType) {
         this.shapeType = shapeType;
+    }
+
+    @Override
+    public void calculateSurface() {
+        float sum_but_no_result=0;
+        int N = points.size();
+
+        int j = N - 1;
+
+        System.out.print("\nTRAZIM POVRSINU ZA: ");
+        for(int i=0; i<N; i++) // N is point number of polygon
+        {
+            System.out.print("x= " + points.get(i).getX() + " y= " + points.get(i).getY());
+            sum_but_no_result += (points.get(j).getX() + points.get(i).getX()) * (points.get(j).getY() - points.get(i).getY());
+            j = i;
+        }
+
+        float sum =  (float)Math.abs(sum_but_no_result) / 2.0f;
+        this.setArea(sum);
     }
 }

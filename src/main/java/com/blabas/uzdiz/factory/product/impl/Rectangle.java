@@ -15,6 +15,7 @@ public class Rectangle extends Shape {
 
     @Override
     public void setPoints(ArrayList<Integer> coordinates, String type, Shape.Point parrentPoint1) {
+        setCoordinates(coordinates);
         Point point1 = new Point(coordinates.get(0), coordinates.get(1));
         Point point2 = new Point(coordinates.get(2), coordinates.get(3));
         points.add(point1);
@@ -32,14 +33,21 @@ public class Rectangle extends Shape {
 
         Area area = new Area(rect);
         this.setShape(area);
-
-
-
     }
 
     @Override
     public void setShapeType(String shapeType) {
         this.shapeType = shapeType;
+    }
+
+    @Override
+    public void calculateSurface() {
+        System.out.print("\nTRAZIM POVRSINU PRAVOKUTNIKA ZA: ");
+        float width = getCoordinates().get(2) - getCoordinates().get(0);
+        float height = getCoordinates().get(3) - getCoordinates().get(1);
+
+        float area = width * height;
+        setArea(area);
     }
 }
 //

@@ -15,6 +15,7 @@ public class Circle extends Shape {
 
     @Override
     public void setPoints(ArrayList<Integer> coordinates, String type, Shape.Point parrentPoint1) {
+        setCoordinates(coordinates);
         Point point1 = new Point(coordinates.get(0), coordinates.get(1), coordinates.get(2));
         points.add(point1);
 
@@ -35,5 +36,12 @@ public class Circle extends Shape {
     @Override
     public void setShapeType(String shapeType) {
         this.shapeType = shapeType;
+    }
+
+    @Override
+    public void calculateSurface() {
+        int radius = getCoordinates().get(2);
+        double area = radius * radius * Math.PI;
+        setArea((float)area);
     }
 }
