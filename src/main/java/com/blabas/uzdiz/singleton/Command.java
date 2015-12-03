@@ -4,14 +4,17 @@ import com.blabas.uzdiz.composite.component.ElementManager;
 import com.blabas.uzdiz.composite.component.ElementComponent;
 import com.blabas.uzdiz.facade.ElementAdapter;
 import com.blabas.uzdiz.facade.Validator;
+import com.blabas.uzdiz.registry.Registry;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by bozidar on 02.12.2015..
  */
 public class Command {
+
+    private Registry registry;
+
     /**
      * Static to class instance of the class.
      */
@@ -67,5 +70,9 @@ public class Command {
 
 
         }
+    }
+
+    public void setRegistry(Registry registry) {
+        this.registry = registry;
     }
 }
