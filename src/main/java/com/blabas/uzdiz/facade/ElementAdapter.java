@@ -27,16 +27,18 @@ public class ElementAdapter {
     private final int CIRCLE = 3;
     private final int RECTANGLE = 4;
     private Factory shapeFactory;
+    private String[] args;
 
-    public ElementAdapter() {
+    public ElementAdapter(String[] args) {
         fileReader = new FileReader();
         regexMatcher = new RegexMatcher();
         parrentComponents = new ArrayList<>();
         shapeFactory = new ShapeFactory();
+        this.args = args;
     }
 
 
-    public boolean isFileNameValid(String[] args) {
+    public boolean isFileNameValid() {
         return regexMatcher.checkRegex(args);
     }
 
@@ -93,7 +95,8 @@ public class ElementAdapter {
                         childItem.setColor(item.split("   ")[4]);
                         println("Child: " + childItem.getCode());
                         println("Parretn: " + childItem.getParrent());
-                        childIntersectParrent(parrentComponent, childItem);
+                        boolean isIntersected = childIntersectParrent(parrentComponent, childItem);
+                        childItem.setIntersectParrent(isIntersected);
                         parrentComponent.add(childItem);
                         break;
                     }
@@ -134,7 +137,7 @@ public class ElementAdapter {
         return shape;
     }
 
-    private void childIntersectParrent(ElementComponent parrentComponent, ElementComponent childComponent) {
+    private boolean childIntersectParrent(ElementComponent parrentComponent, ElementComponent childComponent) {
 
 
         println("PARRENT x: " + parrentComponent.getShape().getPoints().get(0).getX());
@@ -149,8 +152,12 @@ public class ElementAdapter {
 
         if(!b.isEmpty()){
             println("INTERSECT: " + "DA");
+            return true;
+
         }else{
             println("INTERSECT: " + "NE");
+            return false;
+
         }
 
 

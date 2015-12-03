@@ -17,7 +17,7 @@ public class RegistryBuilder {
      */
 
     public static void buildRegistry(String args[], Registry registry){
-
+        registry.setArgs(args);
     }
 
 

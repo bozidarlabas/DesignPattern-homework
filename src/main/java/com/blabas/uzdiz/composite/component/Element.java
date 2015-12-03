@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import static com.blabas.uzdiz.utils.SysoutWrapper.println;
+import static com.blabas.uzdiz.utils.SysoutWrapper.printlnHeader;
 
 
 /**
@@ -18,6 +19,8 @@ public class Element extends ElementComponent {
     private String parrent;
     private String color;
     private Shape shape;
+    private boolean intersectParrent;
+    private boolean visible = true;
 
     private ArrayList<ElementComponent> elementComponents = new ArrayList<>();
 
@@ -73,8 +76,24 @@ public class Element extends ElementComponent {
         return elementComponents.get(index);
     }
 
+    public boolean isIntersectParrent() {
+        return intersectParrent;
+    }
+
+    public void setIntersectParrent(boolean intersectParrent) {
+        this.intersectParrent = intersectParrent;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     public void displayElementInfo(){
-        println("Parrent: " + getCode());
+        printlnHeader("\nSlozeni element: " + getCode());
 
         Iterator elementIterator = elementComponents.iterator();
 
@@ -85,13 +104,44 @@ public class Element extends ElementComponent {
     }
 
     public void displayChildInfo(){
-        println("Child: " + getCode());
+        println("   Jednostavni element: " + getCode());
 
         Iterator elementIterator = elementComponents.iterator();
 
         while (elementIterator.hasNext()){
             ElementComponent component = (ElementComponent)elementIterator.next();
             component.displayElementInfo();
+        }
+    }
+
+    public void displayVisibleIntersectedParrentInfo(){
+        boolean showParrent = false;
+
+
+        Iterator elementIterator = elementComponents.iterator();
+
+        while (elementIterator.hasNext()){
+            ElementComponent component = (ElementComponent)elementIterator.next();
+            if(component.isIntersectParrent() && component.isVisible()){
+                if(!showParrent){
+                    printlnHeader("\nSlozeni element: " + getCode());
+                    showParrent = true;
+                }
+
+                component.displayChildInfo();
+            }
+
+        }
+    }
+
+    public void displayVisibleIntersectedChildInfo(){
+        println("   Jednostavni element: " + getCode());
+
+        Iterator elementIterator = elementComponents.iterator();
+
+        while (elementIterator.hasNext()){
+            ElementComponent component = (ElementComponent)elementIterator.next();
+            component.displayVisibleIntersectedParrentInfo();
         }
     }
 

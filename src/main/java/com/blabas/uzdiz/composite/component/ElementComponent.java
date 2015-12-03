@@ -2,6 +2,11 @@ package com.blabas.uzdiz.composite.component;
 
 import com.blabas.uzdiz.factory.product.Shape;
 
+import java.util.Iterator;
+
+import static com.blabas.uzdiz.utils.SysoutWrapper.println;
+import static com.blabas.uzdiz.utils.SysoutWrapper.printlnHeader;
+
 /**
  * Created by bozidar on 02.12.2015..
  */
@@ -64,6 +69,30 @@ public abstract class ElementComponent {
     }
 
     public void setShape(Shape shape) {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean isIntersectParrent() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void setIntersectParrent(boolean intersectParrent) {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean isVisible() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void setVisible(boolean visible) {
+        throw new UnsupportedOperationException();
+    }
+
+    public void displayVisibleIntersectedParrentInfo(){
+        throw new UnsupportedOperationException();
+    }
+
+    public void displayVisibleIntersectedChildInfo(){
         throw new UnsupportedOperationException();
     }
 

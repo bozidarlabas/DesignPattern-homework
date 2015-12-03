@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static com.blabas.uzdiz.utils.SysoutWrapper.println;
+import static com.blabas.uzdiz.utils.SysoutWrapper.printlnHeader;
 
 
 /**
@@ -27,7 +28,7 @@ public class FileReader {
             while((line = reader.readLine()) != null){
                 parseLine(line);
             }
-            println("Datoteka: " + fileName + " je ucitana");
+            printlnHeader("Datoteka: " + fileName + " je ucitana");
         } catch (IOException e) {
             e.printStackTrace();
         }

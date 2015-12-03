@@ -28,9 +28,8 @@ public class RegexMatcher {
         Matcher matcher = pattern.matcher(getFileName(args));
         boolean status = matcher.matches();
         if(status){
-            printlnHeader("naziv datoteke");
             loadedFileName =  matcher.group(1).split(" ")[0];
-            println("datoteka: " + matcher.group(1).split(" ")[0]);
+            printlnHeader("Validacija 1 - naziv txt datoteke je ispravan");
             return true;
         }
         println("Preko komandne linije morate proslijediti naziv txt datoteke!");

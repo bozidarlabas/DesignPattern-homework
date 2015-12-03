@@ -15,6 +15,6 @@ public class App {
 
         Command command = Command.getInstance();
         command.setRegistry(registry);
-        command.initialize(args);
+        command.initialize();
     }
 }

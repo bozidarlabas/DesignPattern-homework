@@ -1,5 +1,7 @@
 package com.blabas.uzdiz.composite.component;
 
+import com.blabas.uzdiz.composite.component.ElementComponent;
+
 import java.util.List;
 
 /**
@@ -7,9 +9,10 @@ import java.util.List;
  */
 public class ElementManager {
 
+
     List<ElementComponent> items;
 
-    public ElementManager(List<ElementComponent> items) {
+    public void setItems(List<ElementComponent> items) {
         this.items = items;
     }
 
@@ -17,6 +20,15 @@ public class ElementManager {
         for(ElementComponent component : items){
             component.displayElementInfo();
         }
+    }
+
+    public void displayVisibleIntersectedElements(){
+        for(ElementComponent component : items){
+            component.displayVisibleIntersectedParrentInfo();
+        }
+    }
+
+    public void changeElementStatus(){
 
     }
 }
