@@ -4,6 +4,7 @@ import com.blabas.uzdiz.iterator.ElementManager;
 import com.blabas.uzdiz.composite.component.ElementComponent;
 import com.blabas.uzdiz.facade.ElementAdapter;
 import com.blabas.uzdiz.facade.Menu;
+import com.blabas.uzdiz.listener.OnMenuItemSelected;
 import com.blabas.uzdiz.registry.Registry;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import static com.blabas.uzdiz.utils.SysoutWrapper.println;
 /**
  * Created by bozidar on 02.12.2015..
  */
-public class Command {
+public class Command implements OnMenuItemSelected{
 
     private Registry registry;
     private ElementAdapter elementAdapter;
@@ -50,6 +51,7 @@ public class Command {
             loadFile();
             parseLoadedFile();
             Menu menu = registry.provideMenu();
+            menu.setOnMenuClickListener(this);
             menu.choseOption();
         }
 
@@ -100,6 +102,7 @@ public class Command {
         elementManager.setItems(allComponents);
     }
 
+    @Override
     public void performSecondOperation() {
         println("\nOdabrali ste opciju 2!\n");
         for(ElementComponent component : elementManager.getItems()){
@@ -107,8 +110,12 @@ public class Command {
         }
     }
 
-    public void performThirdOperation(){
+    @Override
+    public void performThirdOperation(String elementCode, boolean status){
         println("\nOdabrali ste opciju 3!\n");
+
+
+
     }
 
     public void setRegistry(Registry registry) {
