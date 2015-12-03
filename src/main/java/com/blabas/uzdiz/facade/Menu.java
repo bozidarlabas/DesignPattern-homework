@@ -43,11 +43,10 @@ public class Menu {
         this.onMenuItemSelected = onMenuItemSelected;
     }
 
-
-
     private void performOperation(int chosedOption){
         switch (chosedOption){
             case 1:
+                onMenuItemSelected.performFirstOperation();
                 break;
             case 2:
                 onMenuItemSelected.performSecondOperation();

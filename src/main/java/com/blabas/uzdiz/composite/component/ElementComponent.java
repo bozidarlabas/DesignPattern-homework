@@ -96,6 +96,14 @@ public abstract class ElementComponent {
         throw new UnsupportedOperationException();
     }
 
+    public void changeStatus(String code, boolean status){
+        throw new UnsupportedOperationException();
+    }
+
+    public void changeChildStatus(String code, boolean status){
+        throw new UnsupportedOperationException();
+    }
+
 
 
 }
