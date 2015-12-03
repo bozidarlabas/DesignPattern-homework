@@ -1,9 +1,12 @@
 package com.blabas.uzdiz.composite.component;
 
 import com.blabas.uzdiz.factory.product.Shape;
+import com.blabas.uzdiz.iterator.ElementManager;
+import com.blabas.uzdiz.iterator.Iterator;
+import com.blabas.uzdiz.registry.Registry;
+import com.blabas.uzdiz.singleton.Command;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import static com.blabas.uzdiz.utils.SysoutWrapper.println;
 import static com.blabas.uzdiz.utils.SysoutWrapper.printlnHeader;
@@ -21,8 +24,14 @@ public class Element extends ElementComponent {
     private Shape shape;
     private boolean intersectParrent;
     private boolean visible = true;
+    private Registry registry;
 
     private ArrayList<ElementComponent> elementComponents = new ArrayList<>();
+    private ElementManager elementManager;
+
+    public Element(){
+        elementManager = Command.getInstance().getRegistry().provideElementManager();
+    }
 
     public int getType() {
         return type;
@@ -93,42 +102,45 @@ public class Element extends ElementComponent {
     }
 
     public void displayElementInfo(){
-        printlnHeader("\nSlozeni element: " + getCode());
-
-        Iterator elementIterator = elementComponents.iterator();
-
-        while (elementIterator.hasNext()){
-            ElementComponent component = (ElementComponent)elementIterator.next();
-            component.displayChildInfo();
-        }
+//        printlnHeader("\nSlozeni element: " + getCode());
+//
+//        Iterator elementIterator = elementComponents.iterator();
+//
+//        while (elementIterator.hasNext()){
+//            ElementComponent component = (ElementComponent)elementIterator.next();
+//            component.displayChildInfo();
+//        }
     }
 
     public void displayChildInfo(){
-        println("   Jednostavni element: " + getCode());
-
-        Iterator elementIterator = elementComponents.iterator();
-
-        while (elementIterator.hasNext()){
-            ElementComponent component = (ElementComponent)elementIterator.next();
-            component.displayElementInfo();
-        }
+//        println("   Jednostavni element: " + getCode());
+//
+//        Iterator elementIterator = elementComponents.iterator();
+//
+//        while (elementIterator.hasNext()){
+//            ElementComponent component = (ElementComponent)elementIterator.next();
+//            component.displayElementInfo();
+//        }
     }
 
     public void displayVisibleIntersectedParrentInfo(){
         boolean showParrent = false;
 
 
-        Iterator elementIterator = elementComponents.iterator();
+        Iterator elementIterator = elementManager.getIterator(elementComponents);
+
+
+        //Iterator elementIterator = elementComponents.iterator();
 
         while (elementIterator.hasNext()){
-            ElementComponent component = (ElementComponent)elementIterator.next();
+            ElementComponent component = elementIterator.next();
             if(component.isIntersectParrent() && component.isVisible()){
                 if(!showParrent){
                     printlnHeader("\nSlozeni element: " + getCode());
                     showParrent = true;
                 }
 
-                component.displayChildInfo();
+                component.displayVisibleIntersectedChildInfo();
             }
 
         }
@@ -137,13 +149,11 @@ public class Element extends ElementComponent {
     public void displayVisibleIntersectedChildInfo(){
         println("   Jednostavni element: " + getCode());
 
-        Iterator elementIterator = elementComponents.iterator();
+        Iterator elementIterator = elementManager.getIterator(elementComponents);
 
         while (elementIterator.hasNext()){
             ElementComponent component = (ElementComponent)elementIterator.next();
             component.displayVisibleIntersectedParrentInfo();
         }
     }
-
-
 }

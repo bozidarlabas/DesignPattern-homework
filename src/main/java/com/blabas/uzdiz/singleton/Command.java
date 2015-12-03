@@ -1,6 +1,6 @@
 package com.blabas.uzdiz.singleton;
 
-import com.blabas.uzdiz.composite.component.ElementManager;
+import com.blabas.uzdiz.iterator.ElementManager;
 import com.blabas.uzdiz.composite.component.ElementComponent;
 import com.blabas.uzdiz.facade.ElementAdapter;
 import com.blabas.uzdiz.facade.Menu;
@@ -102,7 +102,9 @@ public class Command {
 
     public void performSecondOperation() {
         println("\nOdabrali ste opciju 2!\n");
-        elementManager.displayVisibleIntersectedElements();
+        for(ElementComponent component : elementManager.getItems()){
+            component.displayVisibleIntersectedParrentInfo();
+        }
     }
 
     public void performThirdOperation(){
@@ -111,5 +113,9 @@ public class Command {
 
     public void setRegistry(Registry registry) {
         this.registry = registry;
+    }
+
+    public Registry getRegistry() {
+        return registry;
     }
 }

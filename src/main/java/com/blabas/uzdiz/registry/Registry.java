@@ -1,6 +1,6 @@
 package com.blabas.uzdiz.registry;
 
-import com.blabas.uzdiz.composite.component.ElementManager;
+import com.blabas.uzdiz.iterator.ElementManager;
 import com.blabas.uzdiz.facade.ElementAdapter;
 import com.blabas.uzdiz.facade.Menu;
 
