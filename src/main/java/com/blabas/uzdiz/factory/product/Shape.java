@@ -9,14 +9,23 @@ public abstract class Shape {
 
     protected ArrayList<Point> points;
     protected String shapeType;
+    private java.awt.Shape shape;
 
     public Shape(){
         points = new ArrayList<>();
     }
 
-    public abstract void setPoints(ArrayList<String> coordinate);
+    public abstract void setPoints(ArrayList<Integer> coordinate, String type, Shape.Point parrentPoint1);
 
     public abstract void setShapeType(String shapeType);
+
+    public void setShape(java.awt.Shape shape) {
+        this.shape = shape;
+    }
+
+    public java.awt.Shape getRealShape() {
+        return shape;
+    }
 
     public String getShapeType() {
         return shapeType;
