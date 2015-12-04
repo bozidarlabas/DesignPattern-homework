@@ -10,4 +10,5 @@ public interface OnMenuItemSelected {
     public void performFourthOperation();
     public void performFifthOperation(String fileName);
     public void performSixthOperation();
+    public void performTestOperation();
 }

@@ -10,6 +10,7 @@ import com.blabas.uzdiz.memento.ElementOriginator;
 import com.blabas.uzdiz.registry.Registry;
 import com.blabas.uzdiz.utils.FileReader;
 import com.blabas.uzdiz.utils.RegexMatcher;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
@@ -135,9 +136,10 @@ public class ElementAdapter {
                         childItem.setColor(item.split("   ")[4]);
                         println("Child: " + childItem.getCode());
                         println("Parretn: " + childItem.getParrent());
-                        boolean isIntersected = childIntersectParrent(parrentComponent, childItem);
+                        ArrayList<String> elementIntersection = childIntersectParrent(parrentComponent, childItem);
                         //collidesWith(parrentComponent, childItem);
-                        childItem.setIntersectParrent(isIntersected);
+                        childItem.setIntersectParrent(Boolean.valueOf(elementIntersection.get(1)));
+                        childItem.setBorderIntersectParrent(elementIntersection.get(0));
 
                         parrentComponent.add(childItem);
                         break;
@@ -198,7 +200,9 @@ public class ElementAdapter {
         return shape;
     }
 
-    private boolean childIntersectParrent(ElementComponent parrentComponent, ElementComponent childComponent) {
+    private ArrayList<String>  childIntersectParrent(ElementComponent parrentComponent, ElementComponent childComponent) {
+
+        ArrayList<String> elementIntersection = new ArrayList<>();
 
 //
 //        println("PARRENT x: " + parrentComponent.getShape().getPoints().get(0).getX());
@@ -213,8 +217,8 @@ public class ElementAdapter {
         double endHeight;
         double endWidth;
 
-        println("PARRENT x: " + parrentComponent.getShape().getRealShape().getBounds());
-        println("CHILD x: " + childComponent.getShape().getRealShape().getBounds());
+//        println("PARRENT x: " + parrentComponent.getShape().getRealShape().getBounds());
+//        println("CHILD x: " + childComponent.getShape().getRealShape().getBounds());
 
         for (int coord : childComponent.getShape().getCoordinates()) {
             System.out.print("\nKOORD:  " + coord);
@@ -226,56 +230,52 @@ public class ElementAdapter {
         startHeight = b.getBounds().getHeight();
         startWidth = b.getBounds().getWidth();
 
-        println("start height: " + startHeight + ", start width: " + startWidth);
+//        println("start height: " + startHeight + ", start width: " + startWidth);
 
         Double x = b.getBounds().getX();
         Double y = b.getBounds().getY();
-        println("SDFSDFSDFSFD: " + x);
+//        println("SDFSDFSDFSFD: " + x);
 
         double calcWidth = 0;
         double calcHeight = 0;
 
         b.intersect(a);
-        if(b.getBounds().getX() > Math.abs(x)){
+        if (b.getBounds().getX() > Math.abs(x)) {
             calcWidth = b.getBounds().getX() - x;
         }
 
-        println("BOUNDSSS: " + y);
-
-        if(b.getBounds().getY() > Math.abs(y)){
+        if (b.getBounds().getY() > Math.abs(y)) {
             calcHeight = b.getBounds().getY() - y;
         }
 
         endHeight = b.getBounds().getHeight();
         endWidth = b.getBounds().getWidth();
-        println("end height: " + calcHeight + ", end width: " + (endWidth + calcWidth));
 
         if (!b.isEmpty()) {
-            println("INTERSECT: " + "DA");
-                checkPointOfIntersection(startHeight, startWidth, endHeight + calcHeight, endWidth + calcWidth);
-
-
-            b.reset();
-            return true;
-
+            String intersectionAxis = checkPointOfIntersection(startHeight, startWidth, endHeight + calcHeight, endWidth + calcWidth);
+//            b.reset();
+            elementIntersection.add(intersectionAxis);
+            elementIntersection.add("true");
         } else {
-            println("INTERSECT: " + "NE");
-            b.reset();
-            return false;
+//            b.reset();
+            String intersectionAxis = "";
+            elementIntersection.add(intersectionAxis);
+            elementIntersection.add("false");
 
         }
+        return elementIntersection;
     }
 
     private String checkPointOfIntersection(double startHeight, double startWidth, double endHeight, double endWidth) {
-        if(startWidth > endWidth && startHeight > endHeight){
+        if (startWidth > endWidth && startHeight > endHeight) {
             println("XY");
             return "xy";
         }
-        if(startWidth > endWidth){
+        if (startWidth > endWidth) {
             println("Y");
             return "y";
         }
-        if(startHeight > endHeight){
+        if (startHeight > endHeight) {
             println("X");
             return "x";
         }

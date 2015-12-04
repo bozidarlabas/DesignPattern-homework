@@ -122,4 +122,23 @@ public abstract class ElementComponent {
     }
 
 
+    public String getBorderIntersectParrent() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void setBorderIntersectParrent(String borderIntersectParrent) {
+        throw new UnsupportedOperationException();
+    }
+
+    public void getElementsWithBorder() {
+
+
+        throw new UnsupportedOperationException();
+    }
+
+    public void getChildParrentElementsWithBorder() {
+        throw new UnsupportedOperationException();
+    }
+
+
 }

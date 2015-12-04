@@ -6,7 +6,9 @@ import com.blabas.uzdiz.iterator.Iterator;
 import com.blabas.uzdiz.registry.Registry;
 import com.blabas.uzdiz.singleton.Command;
 
+import java.awt.geom.Area;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.blabas.uzdiz.utils.SysoutWrapper.println;
 import static com.blabas.uzdiz.utils.SysoutWrapper.printlnHeader;
@@ -23,7 +25,9 @@ public class Element extends ElementComponent {
     private String color;
     private Shape shape;
     private boolean intersectParrent;
+    private String borderIntersectParrent;
     private boolean visible = true;
+    private HashMap<String, String> intersectedChilds;
 
 
     private ArrayList<ElementComponent> elementComponents = new ArrayList<>();
@@ -31,6 +35,7 @@ public class Element extends ElementComponent {
 
     public Element() {
         elementManager = Command.getInstance().getRegistry().provideElementManager();
+        intersectedChilds = new HashMap<>();
     }
 
     public int getType() {
@@ -101,6 +106,14 @@ public class Element extends ElementComponent {
         this.visible = visible;
     }
 
+    public String getBorderIntersectParrent() {
+        return borderIntersectParrent;
+    }
+
+    public void setBorderIntersectParrent(String borderIntersectParrent) {
+        this.borderIntersectParrent = borderIntersectParrent;
+    }
+
     public void displayElementInfo() {
         printlnHeader("\nSlozeni element: " + getCode() + " status: " + isVisible());
 
@@ -124,25 +137,33 @@ public class Element extends ElementComponent {
     }
 
     public void displayVisibleIntersectedParrentInfo() {
-        boolean showParrent = false;
-        Iterator elementIterator = elementManager.getIterator(elementComponents);
-        //Iterator elementIterator = elementComponents.iterator();
-        while (elementIterator.hasNext()) {
-            ElementComponent component = elementIterator.next();
-            if (component.isIntersectParrent() && component.isVisible()) {
-                if (!showParrent) {
-                    printlnHeader("\nSlozeni element: " + getCode());
-                    showParrent = true;
-                }
 
-                component.displayVisibleIntersectedChildInfo();
+        boolean showParrent = false;
+
+        for(int i = 0; i < elementComponents.size(); i++){
+            ElementComponent component = elementComponents.get(i);
+            for(int j = (i+1); j < elementComponents.size(); j++){
+
+                ElementComponent component2 = elementComponents.get(j);
+                if(component.isVisible() && component2.isVisible() && !component.getCode().equals(component2.getCode())){
+                    if (!showParrent) {
+                        printlnHeader("\nSlozeni element: " + getCode());
+                        showParrent = true;
+                    }
+                    Area a = new Area(component.getShape().getRealShape());
+                    Area b = new Area(component2.getShape().getRealShape());
+                    b.intersect(a);
+                    if (!b.isEmpty()) {
+                        System.out.println("    Sifre parova jednostavnih elemenata u presjeku: 1. " + component.getCode() + ", 2. " + component2.getCode());
+//                        intersectedChilds.put(component.getCode(), component2.getCode());
+                        displayVisibleIntersectedChildInfo();
+                    }
+                }
             }
         }
     }
 
     public void displayVisibleIntersectedChildInfo() {
-        println("   Jednostavni element: " + getCode());
-
         Iterator elementIterator = elementManager.getIterator(elementComponents);
 
         while (elementIterator.hasNext()) {
@@ -156,7 +177,7 @@ public class Element extends ElementComponent {
 
         //Iterator elementIterator = elementComponents.iterator();
 
-        if(getCode().equals(code)){
+        if (getCode().equals(code)) {
             setVisible(status);
         }
 
@@ -174,7 +195,7 @@ public class Element extends ElementComponent {
     public void changeChildStatus(String code, boolean status) {
         Iterator elementIterator = elementManager.getIterator(elementComponents);
 
-        if(getCode().equals(code)){
+        if (getCode().equals(code)) {
             setVisible(status);
         }
 
@@ -236,6 +257,49 @@ public class Element extends ElementComponent {
             ElementComponent component = elementIterator.next();
             if (component.isVisible()) {
                 component.getElementColorSurface();
+            }
+        }
+    }
+
+    public void getElementsWithBorder() {
+
+        System.out.print("\n\nRODITELJ | Sifra: " + getCode() + " | Koordinate: ");
+        for(int coord : getShape().getCoordinates()){
+            System.out.print(coord + ",");
+        }
+        System.out.print(" | Boja: " + getColor() + "\n");
+
+        if (isVisible()) {
+            Iterator elementIterator = elementManager.getIterator(elementComponents);
+            while (elementIterator.hasNext()) {
+                ElementComponent component = elementIterator.next();
+                if (component.isVisible()) {
+                    component.getChildParrentElementsWithBorder();
+                }
+            }
+        }
+    }
+
+    public void getChildParrentElementsWithBorder() {
+        Iterator elementIterator = elementManager.getIterator(elementComponents);
+
+
+        System.out.print("\n    Dijete | Sifra: " + getCode() + " | Roditelj: " + getParrent() + " | Koordinate: ");
+        for(int coord : getShape().getCoordinates()){
+            System.out.print(coord + ",");
+        }
+        System.out.print(" | Boja: " + getColor());
+
+        if(!getBorderIntersectParrent().equals("")){
+            System.out.print(" | Prestup granice: " + getBorderIntersectParrent());
+        }
+
+        elementManager.setColors(getColor(), getShape().getArea());
+
+        while (elementIterator.hasNext()) {
+            ElementComponent component = elementIterator.next();
+            if (component.isVisible()) {
+                component.getElementsWithBorder();
             }
 
         }

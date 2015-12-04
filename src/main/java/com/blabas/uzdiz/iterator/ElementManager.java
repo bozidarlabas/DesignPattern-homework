@@ -43,12 +43,12 @@ public class ElementManager implements Container {
      */
     public void setColors(String color, float area) {
         if(colors.containsKey(color)){
-            System.out.println("POSTOJI");
+            //System.out.println("POSTOJI");
             float value = colors.get(color);
             colors.put(color, (value + area));
         }else{
             colors.put(color, area);
-            System.out.println("NISTA");
+            //System.out.println("NISTA");
         }
     }
 

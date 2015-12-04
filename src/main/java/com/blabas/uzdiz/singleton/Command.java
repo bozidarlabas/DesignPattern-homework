@@ -83,9 +83,10 @@ public class Command implements OnMenuItemSelected {
 
     @Override
     public void performFirstOperation() {
-        println("\nOdabrali ste opciju 1!\n");
+        println("\nOdabrali ste opciju 5!\n");
+
         for (ElementComponent component : elementManager.getItems()) {
-            component.displayElementInfo();
+            component.getElementsWithBorder();
         }
     }
 
@@ -141,6 +142,14 @@ public class Command implements OnMenuItemSelected {
     public void performSixthOperation() {
         println("\nOdabrali ste opciju 6!\n");
         elementAdapter.displayLastState();
+    }
+
+    @Override
+    public void performTestOperation() {
+        println("\nOdabrali ste opciju TEST!\n");
+        for (ElementComponent component : elementManager.getItems()) {
+            component.displayElementInfo();
+        }
     }
 
 

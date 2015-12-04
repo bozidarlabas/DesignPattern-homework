@@ -21,7 +21,7 @@ public class Menu {
     public void choseOption() {
         int chosedOption = 0;
         while (chosedOption == 0 || chosedOption != 7) {
-            println("========================================================");
+            println("\n========================================================");
             println("|                      MENU                            |");
             println("========================================================");
             println("| Opcije:                                              |");
@@ -73,6 +73,9 @@ public class Menu {
                 break;
             case 6:
                 onMenuItemSelected.performSixthOperation();
+                break;
+            case 8:
+                onMenuItemSelected.performTestOperation();
                 break;
         }
     }
