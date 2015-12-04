@@ -5,9 +5,9 @@ package com.blabas.uzdiz.memento;
  */
 public class Memento {
     private String elementCode;
-    private String elementStatus;
+    private boolean elementStatus;
 
-    public Memento(String elementCode, String elementStatus){
+    public Memento(String elementCode, boolean elementStatus){
         this.elementCode = elementCode;
         this.elementStatus = elementStatus;
     }
@@ -16,7 +16,7 @@ public class Memento {
         return elementCode;
     }
 
-    public String getElementStatuts() {
+    public boolean getElementStatuts() {
         return elementStatus;
     }
 }

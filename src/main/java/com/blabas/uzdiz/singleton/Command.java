@@ -6,6 +6,8 @@ import com.blabas.uzdiz.composite.component.ElementComponent;
 import com.blabas.uzdiz.facade.ElementAdapter;
 import com.blabas.uzdiz.facade.Menu;
 import com.blabas.uzdiz.listener.OnMenuItemSelected;
+import com.blabas.uzdiz.memento.ElementCareTaker;
+import com.blabas.uzdiz.memento.ElementOriginator;
 import com.blabas.uzdiz.registry.Registry;
 
 import java.util.List;
@@ -52,10 +54,7 @@ public class Command implements OnMenuItemSelected {
             loadFile(registry.provideRegexMatcher().getLoadedFileName());
             List<ElementComponent> parsedComponents = parseLoadedFile();
 
-
             elementAdapter.displayAllCodes();
-
-
 
             storeLoadedItems(parsedComponents);
             Menu menu = registry.provideMenu();
@@ -63,44 +62,7 @@ public class Command implements OnMenuItemSelected {
             menu.choseOption();
         }
 
-        // println("odabrana: " + menu.chosedOption());
-
-
-//        ElementAdapter elementAdapter = new ElementAdapter();
-//        Validator validator = new Validator();
-//        if(elementAdapter.isFileNameValid(registry.getArgs())){
-//
-//            //Element adapter load, read and parse file to composite Tree of Element components
-//            elementAdapter.loadFile();
-//            elementAdapter.readFile();
-//            elementAdapter.parseParrentItems();
-//            List<ElementComponent> components = elementAdapter.parseChildItems();
-//
-//            //Element manager displays data from Tree of Element components
-//            ElementManager elementManager = new ElementManager(components);
-//            elementManager.getElementList();
-
-
-        //println("test: " + items.getComponent(0).getCode());
-        //validator.validateElement(items);
-
-
-        //String shapeType = shapeMaker.determineShapeType();
-        //shapeMaker.buildShape(shapeType);
-
-//            Rectangle2D.Float rectangle1 = new Rectangle2D.Float(0,0, 10, 10);
-//            Rectangle2D.Float rectangle2 = new Rectangle2D.Float(5,5,15,15);
-//
-//            println("presjek: " + rectangle1.intersects(rectangle2));
-
-
-        //}
     }
-
-//    private void validateItems(List<ElementComponent> parsedComponents){
-//        Validator validator = registry.provideValidator();
-//        validator.checkCodeDuplicate(parsedComponents);
-//    }
 
     private void storeLoadedItems(List<ElementComponent> allComponents) {
         ElementManager elementManager = registry.provideElementManager();
@@ -141,6 +103,13 @@ public class Command implements OnMenuItemSelected {
         for (ElementComponent component : elementManager.getItems()) {
             component.changeStatus(elementCode, status);
         }
+
+        //Using Memento design pattern for storing and retriving last element state (code and status)
+        ElementOriginator originator = registry.provideOriginator();
+        ElementCareTaker careTaker = registry.provideCareTaker();
+
+        originator.setState(elementCode, status);
+        careTaker.add(originator.saveStateToMemento());
     }
 
     @Override
@@ -166,6 +135,12 @@ public class Command implements OnMenuItemSelected {
             List<ElementComponent> parsedComponents = parseLoadedFile();
             storeLoadedItems(parsedComponents);
         }
+    }
+
+    @Override
+    public void performSixthOperation() {
+        println("\nOdabrali ste opciju 6!\n");
+        elementAdapter.displayLastState();
     }
 
 

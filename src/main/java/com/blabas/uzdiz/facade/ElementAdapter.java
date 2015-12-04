@@ -5,6 +5,8 @@ import com.blabas.uzdiz.composite.component.Element;
 import com.blabas.uzdiz.factory.creator.Factory;
 import com.blabas.uzdiz.factory.creator.impl.ShapeFactory;
 import com.blabas.uzdiz.factory.product.Shape;
+import com.blabas.uzdiz.memento.ElementCareTaker;
+import com.blabas.uzdiz.memento.ElementOriginator;
 import com.blabas.uzdiz.registry.Registry;
 import com.blabas.uzdiz.utils.FileReader;
 import com.blabas.uzdiz.utils.RegexMatcher;
@@ -45,6 +47,7 @@ public class ElementAdapter {
         codes = new ArrayList<>();
         validator = registry.provideValidator();
         correctLoadedItems = new ArrayList<>();
+        this.registry = registry;
     }
 
 
@@ -220,6 +223,41 @@ public class ElementAdapter {
         }
     }
 
+    public void displayLastState(){
+        //Using Memento design pattern for retriving last element state (code and status)
+        ElementOriginator originator = registry.provideOriginator();
+        ElementCareTaker careTaker = registry.provideCareTaker();
+
+        originator.restoreFromMemento(careTaker.getLastState());
+        String changedElementCode = originator.getElementCode();
+        boolean changedElementStatus = originator.getElementStatus();
+
+        if(!changedElementCode.equals("")){
+            System.out.print("Zadnja promjena elementa " + changedElementCode + " je promjena statusa u ");
+
+            if(changedElementStatus)
+                System.out.print("aktivan\n");
+            else System.out.print("sakriven\n");
+
+            originator.restoreFromMemento(careTaker.getBeforeLastState());
+            changedElementCode = originator.getElementCode();
+            changedElementStatus = originator.getElementStatus();
+
+            if(!changedElementCode.equals("")){
+                System.out.print("Predzadnja promjena elementa " + changedElementCode + " je promjena statusa u ");
+
+                if(changedElementStatus)
+                    System.out.print("aktivan\n");
+                else System.out.print("sakriven\n");
+            }else{
+                println("Nema predzadnjeg zapisa");
+            }
+
+        }else{
+            println("Nema prethodnih zapisa");
+        }
+    }
+
 
 
 
@@ -231,12 +269,7 @@ public class ElementAdapter {
         return Integer.parseInt(data);
     }
 
-//    public String determineShapeType(){
-//        String elementItem = readFile(0);
-//        String coordinates = elementItem.split("   ")[3];
-//        String[] coordinatesArray = coordinates.split(",");
-//        return "Rectangle";
-//    }
+
 
     public void buildShape(String type) {
         Factory shapeFactory = new ShapeFactory();

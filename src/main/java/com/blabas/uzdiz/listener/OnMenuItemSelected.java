@@ -9,4 +9,5 @@ public interface OnMenuItemSelected {
     public void performThirdOperation(String elementCode, boolean status); //true - visible, false - invisible
     public void performFourthOperation();
     public void performFifthOperation(String fileName);
+    public void performSixthOperation();
 }

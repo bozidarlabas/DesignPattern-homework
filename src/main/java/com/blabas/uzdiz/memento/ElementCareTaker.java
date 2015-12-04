@@ -20,4 +20,16 @@ public class ElementCareTaker {
     public Memento get(int index){
         return listMemento.get(index);
     }
+
+    public Memento getLastState(){
+        if(listMemento.size() > 0)
+            return listMemento.get(listMemento.size() - 1);
+        return new Memento("", false);
+    }
+
+    public Memento getBeforeLastState(){
+        if(listMemento.size() > 1)
+            return listMemento.get(listMemento.size() - 2);
+        return new Memento("", false);
+    }
 }

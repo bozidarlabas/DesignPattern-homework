@@ -20,7 +20,7 @@ public class Menu {
 
     public void choseOption() {
         int chosedOption = 0;
-        while (chosedOption == 0 || chosedOption != 6) {
+        while (chosedOption == 0 || chosedOption != 7) {
             println("========================================================");
             println("|                      MENU                            |");
             println("========================================================");
@@ -29,8 +29,9 @@ public class Menu {
             println("|        2. Pregled jednostavnih elem. u presjeku      |");
             println("|        3. Promjena statusa elementa                  |");
             println("|        4. Ukupne povrsine boja                       |");
-            println("|        5. Vlastita funkcionalnost                    |");
-            println("|        6. Izlaz                                      |");
+            println("|        5. Ucitavanje dodatne datoteke                |");
+            println("|        6. Dohvacanje zadnjih promjena                |");
+            println("|        7. Izlaz                                      |");
             println("========================================================");
             System.out.print("Odaberite opciju : ");
 
@@ -56,7 +57,7 @@ public class Menu {
                 String code = sc.nextLine();
                 System.out.print("Unesite novi status elementa : ");
                 String status = sc.nextLine();
-                if (status.equals("aktivni")) {
+                if (status.equals("aktivan")) {
                     onMenuItemSelected.performThirdOperation(code, true);
                 } else {
                     onMenuItemSelected.performThirdOperation(code, false);
@@ -69,6 +70,9 @@ public class Menu {
                 System.out.print("Unesite naziv datoteke : ");
                 String fileName = sc.nextLine();
                 onMenuItemSelected.performFifthOperation(fileName);
+                break;
+            case 6:
+                onMenuItemSelected.performSixthOperation();
                 break;
         }
     }

@@ -4,6 +4,8 @@ import com.blabas.uzdiz.facade.Validator;
 import com.blabas.uzdiz.iterator.ElementManager;
 import com.blabas.uzdiz.facade.ElementAdapter;
 import com.blabas.uzdiz.facade.Menu;
+import com.blabas.uzdiz.memento.ElementCareTaker;
+import com.blabas.uzdiz.memento.ElementOriginator;
 import com.blabas.uzdiz.utils.RegexMatcher;
 
 /**
@@ -16,6 +18,7 @@ public class Registry {
     private ElementAdapter elemenentAdapter;
     private ElementManager elementManager;
     private RegexMatcher regexMatcher;
+    private ElementCareTaker careTaker;
 
     public String[] getArgs() {
         return args;
@@ -56,6 +59,17 @@ public class Registry {
 
     public Validator provideValidator(){
        return new Validator();
+    }
+
+    public ElementOriginator provideOriginator(){
+        return new ElementOriginator();
+    }
+
+    public ElementCareTaker provideCareTaker(){
+        if(this.careTaker == null){
+            this.careTaker = new ElementCareTaker();
+        }
+        return this.careTaker;
     }
 
 }
