@@ -12,6 +12,7 @@ import com.blabas.uzdiz.utils.FileReader;
 import com.blabas.uzdiz.utils.RegexMatcher;
 
 import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,14 +80,14 @@ public class ElementAdapter {
             String componentCode = item.split("   ")[1];
             String parrentCode = item.split("   ")[2];
             ArrayList<Integer> coord = getCoordinates(item.split("   ")[3]);
-            if(validator.checkCoordinates(componentCode, coord)){
-                if(componentCode.equals(parrentCode) && !isFirstElementContainer){
+            if (validator.checkCoordinates(componentCode, coord)) {
+                if (componentCode.equals(parrentCode) && !isFirstElementContainer) {
                     isFirstElementContainer = true;
-                }else if(!componentCode.equals(parrentCode) && !isFirstElementContainer){
+                } else if (!componentCode.equals(parrentCode) && !isFirstElementContainer) {
                     validator.firstElementNotParrent();
                 }
 
-                if(isFirstElementContainer){
+                if (isFirstElementContainer) {
                     if (!validator.codeAlreadyExist(codes, componentCode)) {
                         correctLoadedItems.add(item);
                         code.setStoredCode(componentCode);
@@ -105,8 +106,6 @@ public class ElementAdapter {
                     }
                 }
             }
-
-
 
 
         }
@@ -137,18 +136,18 @@ public class ElementAdapter {
                         println("Child: " + childItem.getCode());
                         println("Parretn: " + childItem.getParrent());
                         boolean isIntersected = childIntersectParrent(parrentComponent, childItem);
+                        //collidesWith(parrentComponent, childItem);
                         childItem.setIntersectParrent(isIntersected);
 
                         parrentComponent.add(childItem);
                         break;
                     }
                 }
-                if(!correctParrent){
+                if (!correctParrent) {
                     String childCode = item.split("   ")[1];
-                    if(validator.existEqualParrentChildCode(childCode, parrentCode)){
+                    if (validator.existEqualParrentChildCode(childCode, parrentCode)) {
 
-                    }
-                    else{
+                    } else {
                         validator.parrentCodeExistsMessage(parrentCode, childCode);
                     }
 
@@ -201,29 +200,115 @@ public class ElementAdapter {
 
     private boolean childIntersectParrent(ElementComponent parrentComponent, ElementComponent childComponent) {
 
+//
+//        println("PARRENT x: " + parrentComponent.getShape().getPoints().get(0).getX());
+//        println("PARRENT y: " + parrentComponent.getShape().getPoints().get(0).getY());
+//        println("PARRENT x: " + parrentComponent.getShape().getPoints().get(1).getX());
+//        println("PARRENT y: " + parrentComponent.getShape().getPoints().get(1).getY());
+//
+//        println("CHILD x: " + childComponent.getShape().getRealShape().getBounds());
 
-        println("PARRENT x: " + parrentComponent.getShape().getPoints().get(0).getX());
-        println("PARRENT y: " + parrentComponent.getShape().getPoints().get(0).getY());
-        println("PARRENT x: " + parrentComponent.getShape().getPoints().get(1).getX());
-        println("PARRENT y: " + parrentComponent.getShape().getPoints().get(1).getY());
+        double startHeight;
+        double startWidth;
+        double endHeight;
+        double endWidth;
 
+        println("PARRENT x: " + parrentComponent.getShape().getRealShape().getBounds());
         println("CHILD x: " + childComponent.getShape().getRealShape().getBounds());
-        Area a = ((Area) parrentComponent.getShape().getRealShape());
-        Area b = (Area) childComponent.getShape().getRealShape();
+
+        for (int coord : childComponent.getShape().getCoordinates()) {
+            System.out.print("\nKOORD:  " + coord);
+        }
+
+        Area a = new Area(parrentComponent.getShape().getRealShape());
+        Area b = new Area(childComponent.getShape().getRealShape());
+
+        startHeight = b.getBounds().getHeight();
+        startWidth = b.getBounds().getWidth();
+
+        println("start height: " + startHeight + ", start width: " + startWidth);
+
+        Double x = b.getBounds().getX();
+        Double y = b.getBounds().getY();
+        println("SDFSDFSDFSFD: " + x);
+
+        double calcWidth = 0;
+        double calcHeight = 0;
+
         b.intersect(a);
+        if(b.getBounds().getX() > Math.abs(x)){
+            calcWidth = b.getBounds().getX() - x;
+        }
+
+        println("BOUNDSSS: " + y);
+
+        if(b.getBounds().getY() > Math.abs(y)){
+            calcHeight = b.getBounds().getY() - y;
+        }
+
+        endHeight = b.getBounds().getHeight();
+        endWidth = b.getBounds().getWidth();
+        println("end height: " + calcHeight + ", end width: " + (endWidth + calcWidth));
 
         if (!b.isEmpty()) {
             println("INTERSECT: " + "DA");
+                checkPointOfIntersection(startHeight, startWidth, endHeight + calcHeight, endWidth + calcWidth);
+
+
+            b.reset();
             return true;
 
         } else {
             println("INTERSECT: " + "NE");
+            b.reset();
             return false;
 
         }
     }
 
-    public void displayLastState(){
+    private String checkPointOfIntersection(double startHeight, double startWidth, double endHeight, double endWidth) {
+        if(startWidth > endWidth && startHeight > endHeight){
+            println("XY");
+            return "xy";
+        }
+        if(startWidth > endWidth){
+            println("Y");
+            return "y";
+        }
+        if(startHeight > endHeight){
+            println("X");
+            return "x";
+        }
+        return "";
+    }
+
+    private void checkPolygonIntersection(double startHeight, double startWidth, double X, double Y) {
+        println("AJMOOOOOO: " + startHeight + ", " + startWidth + ", " + X + ", " + Y);
+    }
+
+    public void collidesWith(ElementComponent parrentComponent, ElementComponent childComponent) {
+
+//        println("PARRENT x: " + parrentComponent.getShape().getPoints().get(0).getX());
+//        println("PARRENT y: " + parrentComponent.getShape().getPoints().get(0).getY());
+//        println("PARRENT x: " + parrentComponent.getShape().getPoints().get(1).getX());
+//        println("PARRENT y: " + parrentComponent.getShape().getPoints().get(1).getY());
+
+        println("PARRENT x: " + parrentComponent.getShape().getRealShape().getBounds());
+        println("CHILD x: " + childComponent.getShape().getRealShape().getBounds());
+
+        Area a = ((Area) parrentComponent.getShape().getRealShape());
+        Area b = (Area) childComponent.getShape().getRealShape();
+
+
+        if (b.getBounds2D().intersects(a.getBounds2D())) {
+            println("DA");
+        } else {
+            println("NE");
+        }
+
+    }
+
+    public void displayLastState() {
         //Using Memento design pattern for retriving last element state (code and status)
         ElementOriginator originator = registry.provideOriginator();
         ElementCareTaker careTaker = registry.provideCareTaker();
@@ -232,10 +317,10 @@ public class ElementAdapter {
         String changedElementCode = originator.getElementCode();
         boolean changedElementStatus = originator.getElementStatus();
 
-        if(!changedElementCode.equals("")){
+        if (!changedElementCode.equals("")) {
             System.out.print("Zadnja promjena elementa " + changedElementCode + " je promjena statusa u ");
 
-            if(changedElementStatus)
+            if (changedElementStatus)
                 System.out.print("aktivan\n");
             else System.out.print("sakriven\n");
 
@@ -243,32 +328,25 @@ public class ElementAdapter {
             changedElementCode = originator.getElementCode();
             changedElementStatus = originator.getElementStatus();
 
-            if(!changedElementCode.equals("")){
+            if (!changedElementCode.equals("")) {
                 System.out.print("Predzadnja promjena elementa " + changedElementCode + " je promjena statusa u ");
 
-                if(changedElementStatus)
+                if (changedElementStatus)
                     System.out.print("aktivan\n");
                 else System.out.print("sakriven\n");
-            }else{
+            } else {
                 println("Nema predzadnjeg zapisa");
             }
 
-        }else{
+        } else {
             println("Nema prethodnih zapisa");
         }
     }
 
 
-
-
-
-
-
-
     private int parseInt(String data) {
         return Integer.parseInt(data);
     }
-
 
 
     public void buildShape(String type) {
