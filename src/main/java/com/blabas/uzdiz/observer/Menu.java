@@ -1,8 +1,9 @@
-package com.blabas.uzdiz.facade;
+package com.blabas.uzdiz.observer;
 
 import com.blabas.uzdiz.listener.OnMenuItemSelected;
 import com.blabas.uzdiz.singleton.Command;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static com.blabas.uzdiz.utils.SysoutWrapper.println;
@@ -10,9 +11,10 @@ import static com.blabas.uzdiz.utils.SysoutWrapper.println;
 /**
  * Created by bozidar on 03.12.2015..
  */
-public class Menu {
+public class Menu implements Subject{
     private Scanner sc;
-    private OnMenuItemSelected onMenuItemSelected;
+    private Observer observer;
+    private int state;
 
     public Menu() {
         sc = new Scanner(System.in);
@@ -36,21 +38,29 @@ public class Menu {
             System.out.print("Odaberite opciju : ");
 
             chosedOption = Integer.parseInt(sc.nextLine());
-            performOperation(chosedOption);
+            setState(chosedOption);
         }
     }
 
-    public void setOnMenuClickListener(OnMenuItemSelected onMenuItemSelected) {
-        this.onMenuItemSelected = onMenuItemSelected;
+
+    @Override
+    public void setState(int state) {
+        this.state = state;
+        notifyObserver(state);
     }
 
-    private void performOperation(int chosedOption) {
+    @Override
+    public void addObserver(Observer observer) {
+        this.observer = observer;
+    }
+
+    public void notifyObserver(int chosedOption){
         switch (chosedOption) {
             case 1:
-                onMenuItemSelected.performFirstOperation();
+                observer.performFirstOperation();
                 break;
             case 2:
-                onMenuItemSelected.performSecondOperation();
+                observer.performSecondOperation();
                 break;
             case 3:
                 System.out.print("Unesite sifru elementa : ");
@@ -58,26 +68,25 @@ public class Menu {
                 System.out.print("Unesite novi status elementa : ");
                 String status = sc.nextLine();
                 if (status.equals("aktivan")) {
-                    onMenuItemSelected.performThirdOperation(code, true);
+                    observer.performThirdOperation(code, true);
                 } else {
-                    onMenuItemSelected.performThirdOperation(code, false);
+                    observer.performThirdOperation(code, false);
                 }
                 break;
             case 4:
-                    onMenuItemSelected.performFourthOperation();
+                observer.performFourthOperation();
                 break;
             case 5:
                 System.out.print("Unesite naziv datoteke : ");
                 String fileName = sc.nextLine();
-                onMenuItemSelected.performFifthOperation(fileName);
+                observer.performFifthOperation(fileName);
                 break;
             case 6:
-                onMenuItemSelected.performSixthOperation();
+                observer.performSixthOperation();
                 break;
             case 8:
-                onMenuItemSelected.performTestOperation();
+                observer.performTestOperation();
                 break;
         }
     }
-
 }

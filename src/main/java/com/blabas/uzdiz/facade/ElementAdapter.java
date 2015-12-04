@@ -7,15 +7,11 @@ import com.blabas.uzdiz.factory.creator.impl.ShapeFactory;
 import com.blabas.uzdiz.factory.product.Shape;
 import com.blabas.uzdiz.memento.ElementCareTaker;
 import com.blabas.uzdiz.memento.ElementOriginator;
-import com.blabas.uzdiz.registry.Registry;
 import com.blabas.uzdiz.utils.FileReader;
 import com.blabas.uzdiz.utils.RegexMatcher;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static com.blabas.uzdiz.utils.SysoutWrapper.println;
@@ -33,23 +29,25 @@ public class ElementAdapter {
     private final int CIRCLE = 3;
     private final int RECTANGLE = 4;
     private Factory shapeFactory;
-    private Registry registry;
     private Validator validator;
     boolean isFirstElement = false;
     boolean isFirstElementContainer = false;
+    ElementOriginator originator;
+    ElementCareTaker careTaker;
 
 
     private ArrayList<Code> codes;
 
-    public ElementAdapter(Registry registry) {
-        fileReader = new FileReader();
-        regexMatcher = registry.provideRegexMatcher();
+    public ElementAdapter(ElementCareTaker careTaker, ElementOriginator originator, RegexMatcher regexMatcher, Validator validator, FileReader fileReader, ShapeFactory shapeFactory) {
+        this.fileReader = fileReader;
+        this.regexMatcher = regexMatcher;
+        this.shapeFactory = shapeFactory;
+        this.validator = validator;
+        this.originator = originator;
+        this.careTaker = careTaker;
         parrentComponents = new ArrayList<>();
-        shapeFactory = new ShapeFactory();
         codes = new ArrayList<>();
-        validator = registry.provideValidator();
         correctLoadedItems = new ArrayList<>();
-        this.registry = registry;
     }
 
 
@@ -310,8 +308,6 @@ public class ElementAdapter {
 
     public void displayLastState() {
         //Using Memento design pattern for retriving last element state (code and status)
-        ElementOriginator originator = registry.provideOriginator();
-        ElementCareTaker careTaker = registry.provideCareTaker();
 
         originator.restoreFromMemento(careTaker.getLastState());
         String changedElementCode = originator.getElementCode();

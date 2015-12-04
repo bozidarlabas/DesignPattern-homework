@@ -1,13 +1,12 @@
 package com.blabas.uzdiz.singleton;
 
-import com.blabas.uzdiz.facade.Validator;
 import com.blabas.uzdiz.iterator.ElementManager;
 import com.blabas.uzdiz.composite.component.ElementComponent;
 import com.blabas.uzdiz.facade.ElementAdapter;
-import com.blabas.uzdiz.facade.Menu;
-import com.blabas.uzdiz.listener.OnMenuItemSelected;
+import com.blabas.uzdiz.observer.Menu;
 import com.blabas.uzdiz.memento.ElementCareTaker;
 import com.blabas.uzdiz.memento.ElementOriginator;
+import com.blabas.uzdiz.observer.Observer;
 import com.blabas.uzdiz.registry.Registry;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import static com.blabas.uzdiz.utils.SysoutWrapper.println;
 /**
  * Created by bozidar on 02.12.2015..
  */
-public class Command implements OnMenuItemSelected {
+public class Command extends Observer{
 
     private Registry registry;
     private ElementAdapter elementAdapter;
@@ -53,12 +52,11 @@ public class Command implements OnMenuItemSelected {
         if (elementAdapter.isFileNameValid(loadedFileName)) {
             loadFile(registry.provideRegexMatcher().getLoadedFileName());
             List<ElementComponent> parsedComponents = parseLoadedFile();
-
             elementAdapter.displayAllCodes();
 
             storeLoadedItems(parsedComponents);
             Menu menu = registry.provideMenu();
-            menu.setOnMenuClickListener(this);
+            menu.addObserver(this);
             menu.choseOption();
         }
 
