@@ -224,8 +224,6 @@ public class Element extends ElementComponent {
                 }
             }
         }
-
-
     }
 
     public void getChildElementColorSurface() {

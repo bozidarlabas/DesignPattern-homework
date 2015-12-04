@@ -4,6 +4,7 @@ import com.blabas.uzdiz.composite.component.ElementComponent;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bozidar on 02.12.2015..
@@ -21,12 +22,34 @@ public class ElementManager implements Container {
         this.items = items;
     }
 
-    public HashMap<String, Float> getColors() {
-        return colors;
+    public void getColors() {
+        java.util.Iterator it = colors.entrySet().iterator();
+        System.out.println("");
+        while (it.hasNext()){
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+            it.remove();
+        }
     }
 
+    public void clearColors(){
+        this.colors.clear();
+    }
+
+    /**
+     * Add area to coresponding color
+     * @param color
+     * @param area
+     */
     public void setColors(String color, float area) {
-        this.colors.put(color, area);
+        if(colors.containsKey(color)){
+            System.out.println("POSTOJI");
+            float value = colors.get(color);
+            colors.put(color, (value + area));
+        }else{
+            colors.put(color, area);
+            System.out.println("NISTA");
+        }
     }
 
     public List<ElementComponent> getItems() {

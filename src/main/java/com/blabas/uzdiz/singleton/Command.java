@@ -149,6 +149,12 @@ public class Command implements OnMenuItemSelected {
         for (ElementComponent component : elementManager.getItems()) {
             component.getElementColorSurface();
         }
+
+        elementManager.getColors();
+        elementManager.clearColors();
+
+
+
     }
 
     @Override
