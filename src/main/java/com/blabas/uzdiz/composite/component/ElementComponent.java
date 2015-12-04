@@ -88,28 +88,36 @@ public abstract class ElementComponent {
         throw new UnsupportedOperationException();
     }
 
-    public void displayVisibleIntersectedParrentInfo(){
+    public void displayVisibleIntersectedParrentInfo() {
         throw new UnsupportedOperationException();
     }
 
-    public void displayVisibleIntersectedChildInfo(){
+    public void displayVisibleIntersectedChildInfo() {
         throw new UnsupportedOperationException();
     }
 
-    public void changeStatus(String code, boolean status){
+    public void changeStatus(String code, boolean status) {
         throw new UnsupportedOperationException();
     }
 
-    public void changeChildStatus(String code, boolean status){
+    public void changeChildStatus(String code, boolean status) {
         throw new UnsupportedOperationException();
     }
 
 
-    public void storeCode(){
+    public void storeCode() {
         throw new UnsupportedOperationException();
     }
 
-    public void storeCodeChild(){
+    public void storeCodeChild() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void getElementColorSurface() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void getChildElementColorSurface() {
         throw new UnsupportedOperationException();
     }
 

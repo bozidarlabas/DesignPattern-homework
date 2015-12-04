@@ -33,7 +33,7 @@ public class ElementAdapter {
     private Validator validator;
     boolean isFirstElement = false;
     boolean isFirstElementContainer = false;
-    private HashMap<String,String> colors;
+
 
     private ArrayList<Code> codes;
 
@@ -45,7 +45,6 @@ public class ElementAdapter {
         codes = new ArrayList<>();
         validator = registry.provideValidator();
         correctLoadedItems = new ArrayList<>();
-        colors = new HashMap<>();
     }
 
 
@@ -193,6 +192,7 @@ public class ElementAdapter {
         }
 
         shape.setPoints(coordinates, type, parrentPoint1);
+        shape.calculateSurface();
         return shape;
     }
 

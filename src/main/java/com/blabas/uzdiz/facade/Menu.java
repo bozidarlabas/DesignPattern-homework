@@ -63,7 +63,7 @@ public class Menu {
                 }
                 break;
             case 4:
-
+                    onMenuItemSelected.performFourthOperation();
                 break;
             case 5:
                 System.out.print("Unesite naziv datoteke : ");

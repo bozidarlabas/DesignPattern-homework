@@ -144,6 +144,14 @@ public class Command implements OnMenuItemSelected {
     }
 
     @Override
+    public void performFourthOperation() {
+        println("\nOdabrali ste opciju 4!\n");
+        for (ElementComponent component : elementManager.getItems()) {
+            component.getElementColorSurface();
+        }
+    }
+
+    @Override
     public void performFifthOperation(String fileName) {
         println("\nOdabrali ste opciju 5!\n");
 

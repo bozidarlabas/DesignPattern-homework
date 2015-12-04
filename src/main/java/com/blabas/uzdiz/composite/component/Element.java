@@ -137,7 +137,6 @@ public class Element extends ElementComponent {
 
                 component.displayVisibleIntersectedChildInfo();
             }
-
         }
     }
 
@@ -157,14 +156,16 @@ public class Element extends ElementComponent {
 
         //Iterator elementIterator = elementComponents.iterator();
 
+        if(getCode().equals(code)){
+            setVisible(status);
+        }
+
         while (elementIterator.hasNext()) {
             ElementComponent component = elementIterator.next();
             if (component.getCode().equals(code)) {
                 component.setVisible(status);
-                break;
-            } else {
-                component.changeChildStatus(code, status);
             }
+            component.changeChildStatus(code, status);
 
 
         }
@@ -173,14 +174,17 @@ public class Element extends ElementComponent {
     public void changeChildStatus(String code, boolean status) {
         Iterator elementIterator = elementManager.getIterator(elementComponents);
 
+        if(getCode().equals(code)){
+            setVisible(status);
+        }
+
         while (elementIterator.hasNext()) {
             ElementComponent component = elementIterator.next();
             if (component.getCode().equals(code)) {
                 component.setCode(code);
-                break;
-            } else {
-                component.changeStatus(code, status);
             }
+            component.changeStatus(code, status);
+
 
         }
     }
@@ -202,6 +206,39 @@ public class Element extends ElementComponent {
             ElementComponent component = elementIterator.next();
             elementManager.setAllStoredCodes(component.getCode());
             component.storeCode();
+
+        }
+    }
+
+    public void getElementColorSurface() {
+
+
+        // println("RODITELJ: " + getCode() + " povrsina: " + getShape().getArea());
+
+        if (isVisible()) {
+            Iterator elementIterator = elementManager.getIterator(elementComponents);
+            while (elementIterator.hasNext()) {
+                ElementComponent component = elementIterator.next();
+                if (component.isVisible()) {
+                    component.getChildElementColorSurface();
+                }
+            }
+        }
+
+
+    }
+
+    public void getChildElementColorSurface() {
+        Iterator elementIterator = elementManager.getIterator(elementComponents);
+
+        println("DiJETE: " + getCode() + " povrsina: " + getShape().getArea() + " boja: " + getColor());
+        elementManager.setColors(getColor(), getShape().getArea());
+
+        while (elementIterator.hasNext()) {
+            ElementComponent component = elementIterator.next();
+            if (component.isVisible()) {
+                component.getElementColorSurface();
+            }
 
         }
     }

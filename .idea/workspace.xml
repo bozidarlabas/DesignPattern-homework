@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2757b6c-3fff-41b8-bb32-5029d4fcb588" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/podaci1.txt" afterPath="$PROJECT_DIR$/podaci1.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/Element.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/Element.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/ElementComponent.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/ElementComponent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/ElementAdapter.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/ElementAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Validator.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Validator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/Shape.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/Shape.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Circle.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Circle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Polygon.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Polygon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Rectangle.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Rectangle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/registry/RegistryBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/registry/RegistryBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Menu.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Menu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/ElementManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/ElementManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/listener/OnMenuItemSelected.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/listener/OnMenuItemSelected.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/singleton/Command.java" afterPath="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/singleton/Command.java" />
     </list>
     <ignored path="blabas_zadaca_2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,49 +31,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Rectangle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Rectangle.java">
+      <file leaf-file-name="Element.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/Element.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.42857143">
+              <caret line="233" column="102" selection-start-line="233" selection-start-column="102" selection-end-line="233" selection-end-column="102" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ElementAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/ElementAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29306486">
-              <caret line="182" column="45" selection-start-line="182" selection-start-column="45" selection-end-line="182" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Shape.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/Shape.java">
+      <file leaf-file-name="ElementManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/ElementManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
-                <element signature="e#350#351#0" expanded="true" />
-                <element signature="e#377#378#0" expanded="true" />
-                <element signature="e#416#417#0" expanded="true" />
-                <element signature="e#448#449#0" expanded="true" />
+                <element signature="e#648#649#0" expanded="true" />
+                <element signature="e#692#693#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Circle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Circle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="5" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -127,25 +101,32 @@
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/ElementIterator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/Iterator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/Container.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/listener/OnMenuItemSelected.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Menu.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/utils/RegexMatcher.java" />
         <option value="$PROJECT_DIR$/podaci2.txt" />
-        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/ElementComponent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/ElementManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/registry/Registry.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/singleton/Command.java" />
         <option value="$PROJECT_DIR$/podaci1.txt" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/registry/RegistryBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Validator.java" />
         <option value="$PROJECT_DIR$/podaci3.txt" />
-        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/Element.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Polygon.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/Shape.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Rectangle.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Circle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/listener/OnMenuItemSelected.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Menu.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/ElementComponent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/singleton/Command.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/ElementAdapter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/ElementManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/Element.java" />
       </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
     </option>
   </component>
   <component name="ProjectFrameBounds">
@@ -226,7 +207,7 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="facade">
+            <PATH_ELEMENT USER_OBJECT="iterator">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -334,6 +315,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="SearchEverywhereHistoryKey" value="menu&#9;FILE&#9;file:///Users/macbook/Workspaces/UzDiz/zadace/zadaca2/src/main/java/com/blabas/uzdiz/facade/Menu.java" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -352,7 +334,7 @@
       </extension>
       <option name="MAIN_CLASS_NAME" value="com.blabas.uzdiz.App" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="podaci3.txt" />
+      <option name="PROGRAM_PARAMETERS" value="podaci1.txt" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -639,7 +621,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35636857" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32249323" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -648,7 +630,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39864865" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.398374" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -694,7 +676,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="27" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -708,7 +690,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -736,7 +718,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -911,14 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74647886">
-          <caret line="68" column="56" selection-start-line="68" selection-start-column="56" selection-end-line="68" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/utils/RegexMatcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -947,14 +921,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/ElementManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46478873">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/src.zip!/java/awt/Shape.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33239436">
@@ -971,14 +937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/listener/OnMenuItemSelected.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/registry/RegistryBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -987,57 +945,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/ElementComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33239436">
-          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1729#1730#0" expanded="true" />
-            <element signature="e#1786#1787#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Validator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="39" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podaci3.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31690142">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/singleton/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/podaci1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31690142">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/Element.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1062,14 +976,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Rectangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Circle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1078,13 +984,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/factory/product/impl/Rectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49295774">
+          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/listener/OnMenuItemSelected.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="64" selection-start-line="65" selection-start-column="64" selection-end-line="65" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podaci3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/podaci1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/ElementComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="98" column="16" selection-start-line="98" selection-start-column="16" selection-end-line="98" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2492#2493#0" expanded="true" />
+            <element signature="e#2549#2550#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/singleton/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="141" column="29" selection-start-line="141" selection-start-column="29" selection-end-line="141" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/facade/ElementAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29306486">
-          <caret line="182" column="45" selection-start-line="182" selection-start-column="45" selection-end-line="182" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.70469797">
+          <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/iterator/ElementManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="e#648#649#0" expanded="true" />
+            <element signature="e#692#693#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blabas/uzdiz/composite/component/Element.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42857143">
+          <caret line="233" column="102" selection-start-line="233" selection-start-column="102" selection-end-line="233" selection-end-column="102" />
+          <folding />
         </state>
       </provider>
     </entry>
